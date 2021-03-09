@@ -1,0 +1,304 @@
+\documentclass[reqno,a4paper,14pt]{amsart}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{ctex}
+\usepackage{mathtools}
+\newcommand\me{\mathrm{e}}
+\newcommand\mi{\mathrm{i}}
+\usepackage{mathtools}
+%\usepackage[greek,english]{babel}
+\usepackage{amssymb}
+\newcommand\dif{\,\mathrm{d}}
+\newcommand\mE{\mathbb{E}}
+\newcommand\Pro{\mathbb{P}}
+\newcommand{\Kov}{柯尔莫戈洛夫}
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\usepackage{hyperref}
+\hypersetup{hypertex=true,
+            colorlinks=true,
+            linkcolor=blue,
+            anchorcolor=black,
+            citecolor=black}
+
+\usepackage{mathrsfs}
+%\usepackage{ntheorem}
+%\theoremsymbol{\mbox{$\box$}}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{example}{例}
+\newtheorem{remark}[theorem]{注}
+\newtheorem*{prove}{\textbf{解}}
+\newenvironment{solution}{\begin{proof}[\indent\bf 解]}{\end{proof}}
+\renewcommand{\proofname}{\indent\bf 证明}
+\newtheorem*{thm2}{Proof of Theorem 2.2}
+\usepackage{geometry}
+\geometry{a4paper,left=2.5cm,right=2.5cm,top=3cm,bottom=3cm}
+
+
+\title{\textbf{测度论导论第一章第一节习题}}
+\author{丁\;\;\; 珍}
+    % \address{201940100486}
+\author{程预敏}
+    % \address{201940100447}
+
+\begin{document}
+\maketitle
+\section{Solution of Ex 1.1.4}
+Let $d_1,d_2\geq 1$, and let $E_1\subset \mathbb{R}^{d_1},E_2\subset \mathbb{R}^{d_2}$ be elementary sets. Show that $E_1\times E_2\subset \mathbb{R}^{d_1+d_2}$ is elementary, and $m^{d_1+d_2}(E_1\times E_2)=m^{d_1}(E_1)\times m^{d_2}(E_2)$.
+\begin{proof}
+    
+    根据Lemma 1.1.2，可以将$E_1,E_2$分割为不相交的boxes的有限并：
+    \begin{equation*}
+        \begin{split}
+            E_1=B_1^1\cup \dots \cup B^1_n,\;\;\;E_2=B_1^2\cup \dots \cup B_m^2.
+        \end{split}
+    \end{equation*}
+    则 $E_1\times E_2=\cup_{\substack{i=1...n\\j=1...m}}B_i^1\times B_j^2$。考虑$B_i^1=I^1_{i,1}\times \dots \times I^1_{i,d_1}$ 和 $B_j^2=I^2_{j,1}\times \dots I^2_{j,d_2}$，则
+    \begin{equation*}
+        B_i^1\times B_j^2=I^1_{i,1}\times \dots \times I^1_{i,d_1}\times I^2_{j,1}\times \dots I^2_{j,d_2}.
+    \end{equation*}
+    显然有$B^1_i\times B^2_j\subset \mathbb{R}^{d_1+d_2}$。此外
+    \begin{equation*}
+        m^{d_1+d_2}(B^1_i\times B^2_j)=\abs{I^1_{i,1}}\times ...\times \abs{I^1_{i,d_1}}\times \abs{I^2_{j,1}}\times ...\times \abs{I^2_{j,d_2}}=m^{d_1}(B^1_i)\times m^{d_2}(B^2_j).
+    \end{equation*}
+    由于 $E_1$ 和 $E_2$ 均由不相交的boxes所分割，则卡氏积 $E_1\times E_2$ 同样也是不相交的。由此，我们可以得到
+    \begin{equation*}
+        m^{d_1+d_2}(E_1\times E_2)=\sum_{\substack{i=1...n\\j=1...m}}m^{d_1}(B^1_i)\times m^{d_2}(B^2_j)=m^{d_1}(E_1)\times m^{d_2}(E_2).
+    \end{equation*}
+\end{proof}
+
+\section{Solution of Ex 1.1.18}
+\begin{proof}
+    Let $E\subset \mathbb{R}^d$ be a bounded set. (1) Show that $E$ and the closure $\overline{E}$ of $E$ have the same Jordan outer measure.\\
+
+    任给$\epsilon>0$，根据外测度 $m^{*,(J)}(E)$ 的定义 (Definition 1.1.4), 存在一个基本集$B\supset E$，使得
+    \begin{equation*}
+        m(B)\leq m^{*,(J)}(E)+\epsilon,
+    \end{equation*}
+    且 $B$可以分割为不相交boxes的有限并：$B=B_1\cup\dots \cup B_n$。其次，令$B^\prime=\overline{B}$，我们有
+    \begin{equation*}
+        \begin{split}
+            B^\prime=\overline{B}=\overline{B_1\cup\dots \cup B_n}=\bigcup_{i=1...n} \overline{B_i}.
+        \end{split}
+    \end{equation*}
+    当$\overline{B_i}$是不相交的boxes时，
+    \begin{equation*}
+        m^{*,(J)}(B^\prime)=\sum_{i=1...n}m(\overline{B_i})=\sum_{i=1...n}m(B_i)=m_{*,(J)}(B^\prime)=m(B).
+    \end{equation*}
+    当$\overline{B_i}$中存在相交的boxes时，可以对其重新分割使得上式成立。
+    显然$B^\prime$是包含$E$的闭集，由$\overline{E}$的最小性，则$\overline{E}\subset B^\prime$，于是
+    \begin{equation*}
+        m^{*,(J)}(\overline{E})\leq m^{*,(J)}(B^\prime)\leq m^{*,(J)}(E)+\epsilon.
+    \end{equation*}
+    由$\epsilon$的任意性和测度对基本集的单调性，我们有$m^{*,(J)}(\overline{E})=m^{*,(J)}(E)$。\\
+    (2) Show that $E$ and the interior $E^o$ of $E$ have the same Jordan inner measure.\\
+    \newline
+    任给$\epsilon>0$，根据内测度 $m_{*,(J)}(E)$ 的定义 (Definition 1.1.4), 存在一个基本集$A\subset E$，使得
+    \begin{equation*}
+        m(A)\geq m_{*,(J)}(E)-\epsilon,
+    \end{equation*}
+    且 $A$可以分割为不相交boxes的有限并：$A=A_1\cup\dots \cup A_k$。同时，令$A^o=\cup_{i=1...k}A_i^o$，我们有
+    \begin{equation*}
+        A^o\subset A\subset E,\;\;\;A^o\text{是开集，}
+    \end{equation*}
+    同时
+    \begin{equation*}
+        m_{*,(J)}(A^o)= \sum_{i=1...k}m_{*,(J)}(A^o_i)=\sum_{i=1...k}m(A_i)=m(A).
+    \end{equation*}
+    由$E^o$的最大性，我们有$A^o\subset E^o$，则
+    \begin{equation*}
+        m_{*,(J)}(E^o)\geq m_{*,(J)}(A^o)=m(A)\geq m_{*,(J)}(E)-\epsilon.
+    \end{equation*}
+    由$\epsilon$的任意性，我们有$m_{*,(J)}(E^o)=m_{*,(J)}(E)$。\\
+    (3) Show that $E$ is Jordan measurable if and only if the topological boundary $\partial E$ of E has Jordan outer measuer zero.\\
+    \newline
+    $\Rightarrow$ 根据上文，当$E$是Jordan 可测集时，$E^o$ 和$\overline{E}$都是 Jordan 可测集。则$\partial E=\overline{E}\backslash E^o$ 是Jordan 可测集，且
+    \begin{equation*}
+        m(\partial E)=m(\overline{E})-m(E^o)=0.
+    \end{equation*}
+    故$\partial E$ 的外测度也为0。\\
+    $\Leftarrow$ 设$\partial E$ 的外测度为0。由于基本测度的非负性，$m_{*,(J)}(\partial E)=0$，且
+    \begin{equation*}
+        m_{*,(J)}(\partial E)\geq \biggl[ m_{*,(J)}(\overline{E})-m_{*,(J)}(E^o)\biggr]\geq \biggl[m_{*,(J)}(\overline{E})-m^{*,(J)}(E^o)\biggr],
+    \end{equation*}
+    则$E^o$是Jordan 可测集。故$\overline{E}$和$E$也是Jordan可测集。\\
+    (4) Show that the \textit{bullet-riddled square} $[0,1]^2\backslash \mathbb{Q}^2$, and the set of bullets $[0,1]^2\cap\mathbb{Q}^2$, both have Jordan inner measure zero and Jordan outer measure one. In particualr, both sets are not Jordan measurable.\\
+    \newline
+    (a) $m_{*,(J)}([0,1]^2\backslash \mathbb{Q}^2)=0$。显然，任给$[0,1]^2$上的box $B$，若$B\neq \emptyset$，则存在$a<b,c<d\in [0,1]$使得$O=(a,b)\times (c,d)\subset B$。对于开box $O$，存在点$p=(r_1,r_2) \in O$，且$r_1,r_2$均为有理数。故$O\not\subset [0,1]^2\backslash \mathbb{Q}^2$，且$B\not\subset [0,1]^2\backslash \mathbb{Q}^2$。任给$[0,1]^2$上的box $B$，都不是$[0,1]^2\backslash \mathbb{Q}^2$的子集，也就找不出除空集以外的基本集包含在$[0,1]^2\backslash \mathbb{Q}^2$中，故$[0,1]^2\backslash \mathbb{Q}^2$的内测度为0，同理$[0,1]^2\cap\mathbb{Q}^2$的内测度也是0。\\
+    \newline
+    (b) $m^{*,(J)}([0,1]^2\backslash \mathbb{Q}^2)=1$。显然$[0,1]^2$是一个包含$R=[0,1]^2\backslash \mathbb{Q}^2$的基本集，且$m^{*,(J)}([0,1]^2)=1$。故$m^{*,(J)}(R)\leq 1$。又，任给基本集$S$使得$S\cap [0,1]^2\neq [0,1]^2$，则$S^\prime=S\cap [0,1]^2\subsetneq [0,1]^2$。显然，$S^\prime$和$[0,1]^2\backslash S^\prime$也是非空基本集。则存在box$B\subset [0,1]^2\backslash S^\prime$和无理数对$i_1,i_2\in [0,1]$，使得$(i_1,i_2)\in B$且$(i_1,i_2)\notin S$。这也就是说，对于任意的基本集$S$，若其不是$[0,1]^2$的覆盖，则它不包含$R$。故$[0,1]^2$是$R$的最小基本集覆盖。故$m^{*,(J)}([0,1]^2\backslash \mathbb{Q}^2)=1$。同理$m^{*,(J)}([0,1]^2\cap \mathbb{Q}^2)=1$。
+\end{proof}
+
+\section{Solution of Ex 1.1.19}
+Let $E\subset \mathbb{R}^d$ be a bounded set, and let $F\subset \mathbb{R}^d$ be an elementary set. Show that $m^{*,(J)}(E)=m^{*,(J)}(E\cap F)+m^{*,(J)}(E\backslash F)$.\\
+\begin{proof}
+    对于任给$\epsilon>0$，根据外测度定义，存在基本集$S\supset E$使得下式成立
+    \begin{equation*}
+        m(S)\leq m^{*,(J)}(E)+\epsilon.
+    \end{equation*}
+    我们可以将$S$划分为$S\cap F$和$S\backslash F$两部分。其中$S\cap F\supset E\cap F$是基本集，且$m^{*,(J)}(E\cap F)\leq m^{*,(J)}(S\cap F)=m(S\cap F)$。另一方面，$S\backslash F\supset E\backslash F$是基本集，且$m^{*,(J)}(E\backslash F)\leq m^{*,(J)}(S\backslash F)=m(S\backslash F)$。综上，我们可以得到
+    \begin{equation}
+        \biggl[m^{*,(J)}(E\cap F)+m^{*,(J)}(E\backslash F)\biggr]\leq \biggl[m(S\cap F)+m(S\backslash F)\biggr]=m(S)\leq m^{*,(J)}(E)+\epsilon.
+        \label{right}
+    \end{equation}
+    类似地，我们可以得到2个基本集$P_1\supset (E\cap F),P_2\supset (E\backslash F)$使得下式成立
+    \begin{equation*}
+        m(P_1)\leq m^{*,(J)}(E\cap F)+\frac{\epsilon}{2},\;\;\; m(P_2)\leq m^{*,(J)}(E\backslash F)+\frac{\epsilon}{2}.
+    \end{equation*}
+    显然，我们有$(P_1\cup P_2)\supset E$是基本集，故
+    \begin{equation*}
+        m(P_1)+m(P_2)\geq m(P_1\cup P_2)\geq m^{*,(J)}(E).
+    \end{equation*}
+    也就是
+    \begin{equation}
+        m^{*,(J)}(E)\leq m^{*,(J)}(E\cap F)+m^{*,(J)}(E\backslash F)+\epsilon.
+        \label{left}
+    \end{equation}
+    结合\eqref{left}和\eqref{right}，我们可以得到题设的结论。
+\end{proof}
+
+\section{Solution of Ex 1.1.20}
+\begin{proof}
+    考虑一个特殊的分段常数函数$f:[a,b]\to \mathbb{R}$，它在区间$[a,r)$上取值为$c_1$，在$[r,b]$上取值为$c_2$，故$\sum_{i=1}^n c_i \abs{I_i}=c_1\times (r-a)+c_2\times (b-r)$。则对于任意的区间$[a,b]$的划分$\mathcal{P}=((x_0,x_1,\dots,x_n),(x^*_1,\dots,x^*_n))$，$f$在划分$\mathcal{P}$上的黎曼和$\mathcal{R}(f,\mathcal{P})$与$\sum_{i=1}^n c_i \abs{I_i}$的误差受$\Delta(\mathcal{P})$影响：
+    \begin{equation*}
+        \abs{\mathcal{R}(f,\mathcal{P})-\sum_{i=1}^n c_i \abs{I_i}}\leq \abs{c_1-c_2}\Delta(\mathcal{P}).
+    \end{equation*}
+    当$\Delta(\mathcal{P})\to 0$，上式趋于0。同理，对于一般的分段常值函数$g:[a,b]\to (c_1,c_2,\dots ,c_k)$(其中$c_i$表示在第$i$个区间上取到的常数，可以重复)，令$M=\max\{\abs{c_i-c_j}:i,j\in(1,2,\dots,k)\}$,
+    \begin{equation*}
+        \abs{\mathcal{R}(g,\mathcal{P})-\sum_{i=1}^n c_i \abs{I_i}}\leq k\times M\times \Delta(\mathcal{P}).
+    \end{equation*}
+    故而，我们可以用$\sum_{i=1}^n c_i \abs{I_i}$表示函数黎曼和的极限，且它与区间的划分无关。
+\end{proof}
+
+
+\section{Solution of Ex 1.1.21}
+\begin{proof}
+    (1) 线性性。根据高等教育出版社出版的《数学分析上册》（第四版）第九章第4节中的第三小节的性质1和2，黎曼可积函数具有线性性质，同时由上题可知，分段常值函数是黎曼可积函数，故其具有线性性。
+
+    (2) 单调性。根据上文中的性质5及其推论，区间$[a,b]$上的黎曼可积函数具有单调性。故分段常值函数具有单调性。
+
+    (3) 示性函数。已知$E$是区间$[a,b]$上的基本集，则其可以表示为不相交的有限个区间的并：
+    \begin{equation*}
+        E=I_1\cup \dots \cup I_k.
+    \end{equation*}
+    故示性函数可以表示为上述区间上的分段常值函数：
+    \begin{equation*}
+        1_E:[a,b]\to\mathbb{R}=\sum_{i=1}^k 1_{I_i}.
+    \end{equation*}
+    由此可得
+    \begin{equation*}
+        \mathrm{p.c. }\int_a^b 1_E(x)dx=\sum_{i=1}^k 1\times \abs{I_i}=\sum_{i=1}^k m(I_i)=m(E).
+    \end{equation*}
+\end{proof}
+
+
+\section{Solution of Ex 1.1.22}\label{22}
+Let $[a,b]$ be an interval, and $f:[a,b]\to \mathbb{R}$ be a bounded function. Show that $f$ is Riemann integrable if and only if it is Darboux integrable.
+\begin{proof}
+    由《数学分析上册》中的定理9.14 (可积的第一充要条件)，黎曼可积性和达布可积性等价。
+\end{proof}
+
+
+\section{Solution of Ex 1.2.25}\label{25}
+Let $[a,b]$ be an interval, and let $f:[a,b]\to \mathbb{R}$ be a bounded function. Show that $f$ is Riemann integrable if and only if the set $E^+ :=\{(x,t):x\in [a,b];0\leq t\leq f(x)\}$ and $E_{-}:=\{(x,t):x\in [a,b];f(x)\leq t\leq 0\}$ are both Jordan measurable in $\mathbb{R}^2$, in which case one has
+\begin{equation*}
+    \int_a^b f(x)dx =m^2(E^+)-m^(E_-),
+\end{equation*}
+where $m^2$ denotes two-dimensional Jordan measure.
+\begin{proof}
+    不妨假设$f$在区间$[a,b]$上是正值函数。\\
+    $\Rightarrow$设$f$是黎曼可积函数，则由 \ref{22} (练习1.1.22)，对于任意$\epsilon>0$，存在分段常值函数$g=\sum_{i=1}^k c_i\times 1_{I_i}$，使得$f\geq g$，且
+    \begin{equation*}
+        \int_a^b g(x)dx =\sum_{i=1}^k c_i\times \abs{I_i}\leq \int_a^b f(x)dx \leq \sum_{i=1}^k c_i\times \abs{I_i}+\epsilon.
+    \end{equation*}
+    令$E_1=\bigcup_{i=1...k} I_i\times [0,c_i]$，显然是一个基本集，且
+    \begin{equation}
+        m^2(E_1)=\int_a^b g(x)dx=\sum_{i=1}^k c_i\times\abs{I_i}\geq \int_a^b f(x)dx -\epsilon.
+        \label{eq_E1}
+    \end{equation}
+    同时，对于任意$\epsilon>0$，存在分段常值函数$h=\sum_{j=1}^l c_j\times 1_{I_j}$，使得$f\leq h$，且
+    \begin{equation*}
+        \int_a^b h(x)dx =\sum_{j=1}^l c_j\abs{I_j}\geq \int_a^b f(x)dx \geq \sum_{j=1}^l c_j\abs{I_j}-\epsilon.
+    \end{equation*}
+    令$E_2=\bigcup_{j=1...l} I_j\times [0,c_j]$，显然是一个基本集，且
+    \begin{equation}
+        m^2(E_2)=\int_a^b h(x)dx=\sum_{j=1}^l c_j\times\abs{I_j}\leq \int_a^b f(x)dx +\epsilon.
+        \label{eq_E2}
+    \end{equation}
+    由于$g\leq f\leq h$，则$E_1\subset E^+\subset E_2$，且
+    \begin{equation*}
+        m^{*,(J)}(E^+)\leq m^2(E_2),\;\;\; m_{*,(J)}(E^+)\geq m^2(E_1).
+    \end{equation*}
+    结合上面的 \eqref{eq_E1} 和 \eqref{eq_E2}，我们有
+    \begin{equation*}
+        m^2(E_1)\geq m^2(E_2)- 2\epsilon.
+    \end{equation*}
+    同时由$\epsilon$的任意性，我们有
+    \begin{equation*}
+        m^{*,(J)}(E^+)=m_{*,(J)}(E^+).
+    \end{equation*}
+    这也就是说，$E^+$是Jordan 可测集。且
+    \begin{equation*}
+        \int_a^b f(x)dx=m^{*,(J)}(E^+)=m_{*,(J)}(E^+)=m(E^+).
+    \end{equation*}
+    当$f$在区间$[a,b]$上是负值函数时有类似的结果，同理可以推广当$f$取值为$\mathbb{R}$时的情形。\\
+    $\Leftarrow$ 当$f$在区间$[a,b]$上是正值函数，且$E^+$是Jordan可测集时，对任意$\epsilon>0$，存在2个基本集$E^1$ 和 $E^2$使得$E^1\subset E^+\subset E^2$，且
+    \begin{equation*}
+        \begin{split}
+            m^2(E^1)&\leq m^2(E^+)\leq m^2(E^1)+\frac{1}{2}\epsilon,\\
+            m^2(E^2)&\geq m^2(E^+)\geq m^2(E^2)-\frac{1}{2}\epsilon.
+        \end{split}
+    \end{equation*}
+    由于$E^1,E^2$是基本集，故可以找到2个分段常值函数$g,h$使得$E^1,E^2$分别是其对应的图像：
+    \begin{equation*}
+        \begin{split}
+            E^1&=\{(x,t):x\in[a,b];0\leq t\leq g(x)\},\;\;\; m^2(E^1)=\int_a^b g(x)dx,\\
+            E^2&=\{(x,t):x\in[a,b];0\leq t\leq h(x)\},\;\;\; m^2(E^2)=\int_a^b h(x)dx.
+        \end{split}
+    \end{equation*}
+    这时，我们有$g\leq f\leq h$，且
+    \begin{equation*}
+        \int_a^b h(x)dx\geq \int_a^b g(x)dx \geq \int_a^b h(x)dx-\epsilon,\;\;\;
+    \end{equation*}
+    由$\epsilon$的任意性，我们有$\overline{\int_a^b} f(x)dx= \underline{\int_a^b} f(x)dx$，也就是$f$是达布可积的。根据\ref{22} (练习1.1.22)，$f$也是黎曼可积的。
+    当$f$在区间$[a,b]$上是负值函数时有类似的结果，同理可以推广当$f$取值为$\mathbb{R}$时的情形。
+\end{proof}
+
+\section{Solution of Ex 1.1.26}
+Extend the definition of Riemann and Darboux integrals to higher dimensions, in such a way that analogues of all the previous results hold.
+\begin{proof}
+    根据上一节的结果 \ref{25}，我们可知$f$是$[a,b]$上的黎曼可积函数，当且仅当其对应的$E^+,E_-$都是基本集。我们延拓这一定义到$\{\mathbb{R}^d,d\in\mathbb{N}\}$的基本集上的有界函数。给定$D\subset \mathbb{R}^d$是基本集，且$f:D\to\mathbb{R}$是定义在$D$上的有界函数。对应地，我们给出集合$E^+$和$E_-$的定义：
+    \begin{equation*}
+        \begin{split}
+            E^+:=\{(x,t)\in D\times \mathbb{R}:x\in D; 0\leq t\leq f(x)\},\;\;\;E_-:=\{(x,t)\in D\times \mathbb{R}:x\in D; f(x)\leq t\leq 0\}.
+        \end{split}
+    \end{equation*}
+    
+    我们给出当$f$是正值函数时，即$f:D\to\mathbb{R}^+$时的达布积分\textit{(Darboux integral)}的定义。
+    \begin{definition}
+        当$f$是正值函数时，$E_-$可以视为空集，我们只需要考虑集合$E^+$，则$f$在基本集$D$上的达布下积分为
+        \begin{equation}
+            \underline{\int_D} f(x)dx := m_{*,(J)}(E^+)=\sup_{\substack{A\subset E^+\\A\ \mathrm{elementary}}} m^{d+1}(A).
+            \label{lower_int}
+        \end{equation}
+        同理，可以定义$f$的达布上积分：
+        \begin{equation}
+            \overline{\int_D} f(x)dx := m^{*,(J)}(E^+)=\inf_{\substack{B\supset E^+\\ B\ \mathrm{elementary}}} m^{d+1}(B).
+            \label{upper_int}
+        \end{equation}
+        可以验证，基本集$A,B$可以对应到$D$上的分段常值函数，则可以将上述的定义 \eqref{lower_int} 和 \eqref{upper_int} 改写为分段常值函数的形式，则更贴近于课本Definition 1.1.6的内容。
+        $f$是集合$D$上的达布可积函数，当且仅当其对应的$E^+$是基本集，且
+    \begin{equation*}
+        \int_D f(x)dx =m^{d+1}(E^+).
+    \end{equation*}
+    \end{definition}
+    相应地，对于$D$上的一般函数$f:D\to\mathbb{R}$，称$f$是达布可积的，当且仅当其对应的$E^+,E_-$都是基本集，且$\int_D f(x)dx=m^{d+1}(E^+)-m^{d+1}(E_-)$。
+\end{proof}
+\end{document}
