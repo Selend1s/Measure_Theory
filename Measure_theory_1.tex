@@ -131,9 +131,13 @@ Let $d_1,d_2\geq 1$, and let $E_1\subset \mathbb{R}^{d_1},E_2\subset \mathbb{R}^
     则$E^o$是Jordan 可测集。故$\overline{E}$和$E$也是Jordan可测集。\\
     (4) Show that the \textit{bullet-riddled square} $[0,1]^2\backslash \mathbb{Q}^2$, and the set of bullets $[0,1]^2\cap\mathbb{Q}^2$, both have Jordan inner measure zero and Jordan outer measure one. In particualr, both sets are not Jordan measurable.\\
     \newline
-    (a) $m_{*,(J)}([0,1]^2\backslash \mathbb{Q}^2)=0$。显然，任给$[0,1]^2$上的box $B$，若$B\neq \emptyset$，则存在$a<b,c<d\in [0,1]$使得$O=(a,b)\times (c,d)\subset B$。对于开box $O$，存在点$p=(r_1,r_2) \in O$，且$r_1,r_2$均为有理数。故$O\not\subset [0,1]^2\backslash \mathbb{Q}^2$，且$B\not\subset [0,1]^2\backslash \mathbb{Q}^2$。任给$[0,1]^2$上的box $B$，都不是$[0,1]^2\backslash \mathbb{Q}^2$的子集，也就找不出除空集以外的基本集包含在$[0,1]^2\backslash \mathbb{Q}^2$中，故$[0,1]^2\backslash \mathbb{Q}^2$的内测度为0，同理$[0,1]^2\cap\mathbb{Q}^2$的内测度也是0。\\
-    \newline
-    (b) $m^{*,(J)}([0,1]^2\backslash \mathbb{Q}^2)=1$。显然$[0,1]^2$是一个包含$R=[0,1]^2\backslash \mathbb{Q}^2$的基本集，且$m^{*,(J)}([0,1]^2)=1$。故$m^{*,(J)}(R)\leq 1$。又，任给基本集$S$使得$S\cap [0,1]^2\neq [0,1]^2$，则$S^\prime=S\cap [0,1]^2\subsetneq [0,1]^2$。显然，$S^\prime$和$[0,1]^2\backslash S^\prime$也是非空基本集。则存在box$B\subset [0,1]^2\backslash S^\prime$和无理数对$i_1,i_2\in [0,1]$，使得$(i_1,i_2)\in B$且$(i_1,i_2)\notin S$。这也就是说，对于任意的基本集$S$，若其不是$[0,1]^2$的覆盖，则它不包含$R$。故$[0,1]^2$是$R$的最小基本集覆盖。故$m^{*,(J)}([0,1]^2\backslash \mathbb{Q}^2)=1$。同理$m^{*,(J)}([0,1]^2\cap \mathbb{Q}^2)=1$。
+    (a) $m_{*,(J)}([0,1]^2\backslash \mathbb{Q}^2)=0$。显然，任给$[0,1]^2$上的box $B$，若$m^2(B)\neq 0$，则存在$a<b,c<d\in [0,1]$使得$O=(a,b)\times (c,d)\subset B$。
+    对于开box $O$，存在点$p=(r_1,r_2) \in O$，且$r_1,r_2$均为有理数。
+    故$O\not\subset [0,1]^2\backslash \mathbb{Q}^2$，且$B\not\subset [0,1]^2\backslash \mathbb{Q}^2$。
+    也就找不出除空集和零测度box以外的基本集包含在$[0,1]^2\backslash \mathbb{Q}^2$中，故$[0,1]^2\backslash \mathbb{Q}^2$的内测度为0，同理$[0,1]^2\cap\mathbb{Q}^2$的内测度也是0。\\
+    (b) $m^{*,(J)}([0,1]^2\backslash \mathbb{Q}^2)=1$。显然$[0,1]^2$是一个包含$R=[0,1]^2\backslash \mathbb{Q}^2$的基本集，且$m^{*,(J)}([0,1]^2)=1$。故$m^{*,(J)}(R)\leq 1$。
+    又任给基本集$S$使得$S\cap [0,1]^2\neq [0,1]^2$，则令$S^\prime=S\cap [0,1]^2\subsetneq [0,1]^2$。显然，$S^\prime$和$[0,1]^2\backslash S^\prime$也是非空基本集。
+    若存在box $B\subset [0,1]^2\backslash S^\prime$，使得$m^2(B)\neq 0$，则存在无理数$i_1,i_2\in [0,1]$，使得$(i_1,i_2)\in B$且$(i_1,i_2)\notin S$。这也就是说，对于任意的基本集$S\supset R$，其或者是$[0,1]^2$的覆盖，或者在$[0,1]^2$上，与之相差有限个零测度box。故$\forall  S_{\mathrm{elementary}}\supset R$, 有$S\cap [0,1]^2\supset R$, 且$m(S\cap [0,1]^2)=1$。故$m^{*,(J)}([0,1]^2\backslash \mathbb{Q}^2)=1$。同理$m^{*,(J)}([0,1]^2\cap \mathbb{Q}^2)=1$。
 \end{proof}
 
 \section{Solution of Ex 1.1.19}
