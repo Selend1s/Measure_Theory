@@ -1,0 +1,106 @@
+\documentclass[reqno,a4paper,14pt]{amsart}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{ctex}
+\usepackage{mathtools}
+\newcommand\me{\mathrm{e}}
+\newcommand\mi{\mathrm{i}}
+\usepackage{mathtools}
+%\usepackage[greek,english]{babel}
+\usepackage{amssymb}
+\newcommand\dif{\,\mathrm{d}}
+\newcommand\mE{\mathbb{E}}
+\newcommand\Pro{\mathbb{P}}
+\newcommand{\Kov}{柯尔莫戈洛夫}
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\usepackage{hyperref}
+\hypersetup{hypertex=true,
+            colorlinks=true,
+            linkcolor=blue,
+            anchorcolor=black,
+            citecolor=black}
+
+\usepackage{mathrsfs}
+%\usepackage{ntheorem}
+%\theoremsymbol{\mbox{$\box$}}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{example}{例}
+\newtheorem{remark}[theorem]{注}
+\newtheorem*{prove}{\textbf{解}}
+\newenvironment{solution}{\begin{proof}[\indent\bf 解]}{\end{proof}}
+\renewcommand{\proofname}{\indent\bf 证明}
+\newtheorem*{thm2}{Proof of Theorem 2.2}
+\usepackage{geometry}
+\geometry{a4paper,left=2.5cm,right=2.5cm,top=3cm,bottom=3cm}
+
+
+\title{\textbf{测度论导论第一章第一节习题}}
+\author{丁\;\;\; 珍}
+    % \address{201940100486}
+\author{程预敏}
+    % \address{201940100447}
+
+\begin{document}
+\maketitle
+\section{Solution of EX 1.2.11}
+(i) (Upward monotone convergence) Let $E_1\subset E_2\subset \dots \subset \mathbb{R}^n$ be a countable non-decreasing sequence of Lebesgue measurable sets. Show shta $m(\cup_{n=1}^\infty E_n)=\lim_{n\to\infty} m(E_n)$. (\textit{Hint:} Express $\cup_{n=1}^\infty E_n$ as the countable union of the lacunae $E_n\backslash \cup_{n^\prime=1}^{n-1} E_{n^\prime}$.)
+\begin{proof}
+    
+\end{proof}
+(ii) (Downward monotone convergence) Let $\mathbb{R}^d \supset E_1 \supset E_2\supset \dots$ be a countable non-increasing sequence of Lebesgue measurable sets. If at least one of the $m(E_n)$ is finite, show that $m(\cap_{n=1}^\infty E_n)=\lim_{n\to \infty} m(E_n)$.
+\begin{proof}
+    
+\end{proof}
+(iii) Give a counterexample to show that in the hypothesis that at least one of the $m(E_n)$ is finite in the downward monotone convergence theorem cannot be dropped.
+\begin{proof}
+    
+\end{proof}
+
+
+\section{Solution of EX 1.2.12}
+Show that any map $E\to m(E)$ from Lebesgue measurable sets to elements of $[0,+\infty]$ that obeys the above empty set and countable additivity axioms will also obey the monotinicity and countable subadditivity axioms from Exercise 1.2.3, when restricted to Lebesgue measurable sets of course.
+\begin{proof}
+    
+\end{proof}
+
+
+\section{Solution of EX 1.2.22}
+Let $d,d^\prime\geq 1$ be natural numbers. (i) If $E\subset \mathbb{R}^{d^\prime}$, show that 
+\begin{equation*}
+    (m^{d+d^\prime})^*(E\times F)\leq (m^d)^*(E)\times (m^{d^\prime})^*(F),
+\end{equation*}
+where $(m^d)^*$ denotes $d$-dimensional Lebesgue measure, etc.
+\begin{proof}
+    
+\end{proof}
+(ii) Let $E\subset \mathbb{R}^d, F\subset \mathbb{R}^{d^\prime}$ be Lebesgue measurable sets. Show that $E\times F\subset \mathbb{R}^{d+d^\prime}$ is Lebesgue measurable, with $m^{d+d^\prime}(E\times F)=m^d(E) \dot m^{d^\prime}(F)$. (Note that we allow $E$ or $F$ to have infinite measure, and so one may have to divide into cases or take advantage of the monotone convergence theorem for Lebesgue measure, Exercise 1.2.11)
+\begin{proof}
+    
+\end{proof}
+
+
+\section{Solution of EX 1.2.23}
+(Uniqueness of Lebesgue measure). Show that Lebesgue measure $E\to m(E)$ is the only map from Lebesgue measurable sets to $[0,+\infty]$ that obeys the following axioms:
+
+(i) (Empty set) $m(\emptyset) =0$.
+
+(ii) (Countable additivity) If $E_1,E_2,\dots \subset \mathbb{R}^d$ is a countable sequence of disjoint Lebesgue measurable sets, then $m(\cup_{n=1}^\infty E_n)\sum_{n=1}^\infty m(E_n)$.
+
+(iii) (Translation invariance) If $E$ is Lebesgue measurable and $x\in \mathbb{R}^d$, then $m(E+x)=m(E)$.
+
+(iv) (Normalisation) $m([0,1]^d)=1$.
+\begin{proof}
+    
+\end{proof}
+
+
+
+\end{document}
