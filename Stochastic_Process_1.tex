@@ -1,0 +1,184 @@
+\documentclass[reqno,a4paper,14pt]{amsart}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{ctex}
+\usepackage{mathtools}
+\newcommand\me{\mathrm{e}}
+\newcommand\mi{\mathrm{i}}
+\usepackage{mathtools}
+%\usepackage[greek,english]{babel}
+\usepackage{amssymb}
+\newcommand\dif{\,\mathrm{d}}
+\newcommand\mE{\mathbb{E}}
+\newcommand\Pro{\mathbb{P}}
+\newcommand{\Kov}{柯尔莫戈洛夫}
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+%\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\usepackage{hyperref}
+\hypersetup{hypertex=true,
+            colorlinks=true,
+            linkcolor=blue,
+            anchorcolor=black,
+            citecolor=black}
+
+\usepackage{mathrsfs}
+%\usepackage{ntheorem}
+%\theoremsymbol{\mbox{$\box$}}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{example}{例}
+\newtheorem{remark}[theorem]{注}
+\newtheorem*{prove}{\textbf{解}}
+\newenvironment{solution}{\begin{proof}[\indent\bf 解]}{\end{proof}}
+\renewcommand{\proofname}{\indent\bf 证明}
+\newtheorem*{thm2}{Proof of Theorem 2.2}
+\usepackage{geometry}
+\geometry{a4paper,left=2.5cm,right=2.5cm,top=3cm,bottom=3cm}
+
+
+\title{随机过程记要}
+
+\begin{document}
+\maketitle
+
+
+\section{Solution of Problem 2.1.1}
+Let $M$ have a binomial distribution with parameters $N$ and $p$. COnditioned on $M$, the random variable $X$ has a binomial distribution with parameters $M$ and $\pi$.
+
+(a) Determine the marginal distribution for $X$.
+\begin{proof}
+    见原书Example 1，可得 $X\sim B(N, p\pi)$。
+\end{proof}
+(b) Determine the covariance between $X$ and $Y=M-X$.
+\begin{proof}
+    令$Z=N-X-Y$。我们首先考虑 $X$ 和 $Y$ 的联合概率分布:
+    \begin{equation}
+        \begin{split}
+            \Pro(X=x,Y=y)&=\binom{N}{x+y} p^{x+y} (1-p)^{N-x-y} \binom{x+y}{x} \pi^x (1-\pi)^y\\
+            &=\frac{N!}{x!y!(N-x-y)!} (p\pi)^x (p(1-\pi))^y (1-p)^{N-x-y}.
+            \label{mass}
+        \end{split}
+    \end{equation}
+    则 $(X,Y,Z)$ 服从 $n=N,p_x=\pi p,p_y=p(1-\pi),p_z=(1-p)$ 的多项分布。由多项分布的协方差公式可得，
+    \begin{equation*}
+        cov(X,Y)=p_x\times p_y(N^2-N)-Np_x\times Np_y=-N\times p_x\times p_y.
+    \end{equation*}
+
+    \begin{align*}
+        \mE XY &=\mE MX-\mE X^2,\;\;\; \mE M=Np;\\
+        \mE M^2 &= N^2p^2+Np(1-p),\;\;\; \mE [X|M]=M\pi;\\
+        \mE X&=N\pi p,\;\;\; \mE [X^2|M]=M^2\pi^2+ M\pi(1-\pi);\\
+        \mE X^2&=(N\pi p)^2+N\pi^2p(1-p)+N\pi p(1-\pi);\\
+        \mE (MX)&=\mE [M[X|M]]=\pi\mE M^2=\pi [N^2p^2+Np(1-p)];\\
+        Cov(X,Y)&= \mE (X(M-X))-\mE (X)\mE (M-X)=-Np^2\pi(1-\pi).
+    \end{align*}
+\end{proof}
+
+\section{Solution of Problem 2.1.10}
+A male child is chosen at random from all of the male children in the population. What is the probability distribution for the number of sisters of this child? What is the probability distribution for the number of his brothers?
+\begin{proof}
+    由第二问，我们可以得到家庭孩童性别结构的的概率分布：
+    \begin{equation}
+        \Pro(W)=\frac{1}{2},\;\;\; \Pro(MW)=\frac{1}{4},\;\;\;\Pro(MMW)=\Pro(MMM)=\frac{1}{8}.
+        \label{structure}
+    \end{equation}
+    假设在样本中有10000个家庭，其中5000个家庭只有女儿，2500个家庭有一男一女，1250个家庭中有两男一女，剩下的家庭中有三个男婴。则样本中有
+    \begin{equation*}
+        2500\times 1+1250\times 2+1250\times 3=8750
+    \end{equation*}
+    个男婴。选中这三种家庭的概率分别为
+    \begin{equation*}
+        \Pro(MW \mathrm{\ be \ chosen})=\frac{2500}{8750}=\frac{2}{7},\;\;\;\Pro(MMW \mathrm{\ be \ chosen})=\frac{2500}{8750}=\frac{2}{7},\;\;\;\Pro(MMM \mathrm{\ be \ chosen})=1-\frac{4}{7}=\frac{3}{7}.
+    \end{equation*}
+    结合上面的分析，我们可以得到在性别结构 \eqref{structure} 下的家庭被选中率。其中选中有女婴家庭的概率是$\frac{4}{7}$，选中没有女婴的家庭的概率为$\frac{3}{7}$。选中男婴的兄弟个数的分布为$\Pro(0)=\frac{2}{7},\ \Pro(1)=\frac{2}{7},\ \Pro(2)=\frac{3}{7}$。
+\end{proof}
+
+
+
+\section{Solution of  Exercise 2.2.1}
+\begin{proof}
+    设$A$表示玩家获胜，$r=1,2,3,4,5,6$为红色骰子掷出的概率，$G_i$为第次绿色筛子掷出的点数，则
+    \begin{equation}
+        \Pro(A)=\sum_{i=1}^6 \Pro(A|r=i)\Pro(r=i).
+        \label{0.0}
+    \end{equation}
+    其中，
+    \begin{equation}
+        \begin{split}
+            \Pro(A|r=1)&=\Pro(G_0=3|r=1)+\sum_{i\neq 3,6}\Pro(A,G_0=i|r=1)\\
+            &=\Pro(G_0=3)+\sum_{i\neq 3,6}\Pro(A|G_0=i|r=1)\Pro(G_0=i|r=1)\\
+            &=\Pro(G_0=3)+\sum_{i\neq 3,6}\Pro(A|G_0=i|r=1)\Pro(G_0=i).
+            \label{0.1}
+        \end{split}
+    \end{equation}
+    令$\alpha=\Pro(A|G_0=i|r=1)$，$B$表示在后续的绿色骰子的投掷过程中，点数和4比7先出现。则
+    \begin{equation*}
+        \alpha=\Pro(B)=\sum_{i=1}^6\Pro(B|G_1=i)\Pro(G_1=i).
+    \end{equation*}
+    展开上式，我们可以得到
+    \begin{equation*}
+        \alpha=\Pro(B)=\Pro(G_1=3)+\sum_{i\neq 3,6}\Pro(B|G_1=i)\Pro(G_1=i).
+    \end{equation*}
+    在后续的投掷过程中，$\Pro(B|G_1=i)$与$\Pro(B)$可以视为无差别，则
+    \begin{equation*}
+        \begin{split}
+            \alpha&=\frac{1}{6}+\frac{2}{3}\alpha\;\;\;=>\;\;\;\frac{1}{3}\alpha=\frac{1}{6}\;\;\;=>\;\;\;\alpha=\frac{1}{2}.
+        \end{split}
+    \end{equation*}
+    将上式代入 \eqref{0.1}，可以得到
+    \begin{equation*}
+        \begin{split}
+            \Pro(A|r=1)&=\Pro(G_0=3)+\sum_{i\neq 3,6}\Pro(A|G_0=i|r=1)\Pro(G_0=i)\\
+            &=\frac{1}{6}+4\times\frac{1}{6}\times\frac{1}{2}=\frac{1}{2}.
+        \end{split}
+    \end{equation*}
+    回顾 \eqref{0.0}，可以看出当$i=1,2,3$时，$\Pro(A|r=i)$相等，则
+    \begin{equation*}
+        \Pro(A)=\sum_{i=1,2,3}\Pro(A|r=i)\Pro(r=i)=\frac{1}{2}\times\frac{1}{6}\times 3=\frac{1}{4}
+    \end{equation*}
+\end{proof}
+
+\section{Solution of Problem 2.2.1}
+\textbf{(a)} Argue the equation 
+\begin{equation*}
+    M=\int_A^\infty x \dif F(x) +(1-\alpha) M
+\end{equation*}
+by considering the possibilities, either the first bid is accepted or it is not.
+\begin{proof}
+    Let the first bid $X_1=x$. Following from the equation (2.6), we have 
+    \begin{equation}
+        \mE (g(X))=\mE \{\mE [g(X)|Y]\}.
+        \label{conditional}
+    \end{equation}
+    If $x>A$, we accpet the bid. Otherwise, if $0\leq x\leq A$, following from the i.i.d. attribute of $\{X_n\}$, we have 
+    \begin{equation*}
+        \mE [X_N|X_1=x]=
+        \begin{cases}
+            x,& x>A\\
+            M,& 0\leq x\leq A
+        \end{cases}.
+    \end{equation*}
+    Accounding to the equation \eqref{conditional}, we have 
+    \begin{equation*}
+        \begin{split}
+            \mE \{X_N\}=\int_0^\infty \mE [X_N|X_1=x] \dif F(x)&= \int_A^\infty x\dif F(x)+\int_0^A M\dif F(x)\\
+            &=\int_A^\infty x\dif F(x)+(1-\alpha)M
+        \end{split} 
+    \end{equation*}
+    When $X_1$ has an exponential distribution with parameter $\lambda$, we have 
+    \begin{equation*}
+        \int_A^\infty x\dif F(x)= \int_0^\infty (A+z) \lambda \me^{-\lambda z+\lambda A}\dif z =A\me^{-\lambda A}+\frac{\me^{-\lambda A}}{\lambda}=\me^{-\lambda A}(A+\frac{1}{\lambda}).
+    \end{equation*}
+    Meanwhile, we can obtain
+    \begin{equation*}
+        \alpha=\int_A^\infty \dif F(x)=\int_A^\infty \lambda \me^{-\lambda x}\dif x=\me^{-\lambda A}.
+    \end{equation*}
+    Since $M=\alpha^{-1} \int_A^\infty x\dif F(x)$, we have $M=A+\frac{1}{\lambda}$.
+\end{proof}
+\end{document}
