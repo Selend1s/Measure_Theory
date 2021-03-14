@@ -53,15 +53,49 @@
 \section{Solution of EX 1.2.11}
 (i) (Upward monotone convergence) Let $E_1\subset E_2\subset \dots \subset \mathbb{R}^n$ be a countable non-decreasing sequence of Lebesgue measurable sets. Show shta $m(\cup_{n=1}^\infty E_n)=\lim_{n\to\infty} m(E_n)$. (\textit{Hint:} Express $\cup_{n=1}^\infty E_n$ as the countable union of the lacunae $E_n\backslash \cup_{n^\prime=1}^{n-1} E_{n^\prime}$.)
 \begin{proof}
-    
+    记$E=\cup_{n=1}^\infty E_n$。对于任意$k\geq 2$，令
+    \begin{equation*}
+        G_1=E_1,\;\;\; G_2=E_2-E_1, \cdots, G_k=E_k-E_{k-1}.
+    \end{equation*}
+    根据Lemma 1.2.13，对于任意$k\geq 1$，$G_k$ 是两两不交的可测集，且
+    \begin{equation*}
+        E_n=\bigcup_{k=1}^n G_k,\;\;\; E=\bigcup_{k=1}^\infty G_k.
+    \end{equation*}
+    因此
+    \begin{equation*}
+        m(\bigcup_{n=1}^\infty E_n)=m(E)=\sum_{k=1}^\infty m(G_k)=\lim_{N\to\infty} \sum_{k=1}^N m(G_k)=\lim_{N\to\infty}m\biggl(\bigcup_{k=1}^N G_k\biggr)=\lim_{N\to\infty}m(E_N).
+    \end{equation*}
 \end{proof}
 (ii) (Downward monotone convergence) Let $\mathbb{R}^d \supset E_1 \supset E_2\supset \dots$ be a countable non-increasing sequence of Lebesgue measurable sets. If at least one of the $m(E_n)$ is finite, show that $m(\cap_{n=1}^\infty E_n)=\lim_{n\to \infty} m(E_n)$.
 \begin{proof}
-    
+    记$E=\cap_{n=1}^\infty E_n$。不失一般性，我们假设$m(E_1)<\infty$。令
+    \begin{equation*}
+        G_1=E_1-E_2,\;\;\; G_2=E_2-E_3, \cdots, G_k=E_k-E_{k+1}.
+    \end{equation*}
+    根据Lemma 1.2.13，对于任意$k\geq 1$，$G_k$ 是两两不交的可测集，且
+    \begin{equation*}
+        E_1=E\cup \bigcup_{k=1}^\infty G_k
+    \end{equation*}
+    是一个可测集的不交并。由此，我们有
+    \begin{equation*}
+        \begin{split}
+            m(E_1)&=m(E)+\sum_{k=1}^\infty m(G_k)=m(E)+\lim_{N\to\infty} \sum_{k=1}^N m(G_k)\\
+            &=m(E)+\lim_{N\to\infty}\sum_{k=1}^N\bigl(m(E_k)-m(E_{K+1})\bigr)\\
+            &=m(E)+m(E_1)-\lim_{N\to\infty}m(E_{N+1}).
+        \end{split}
+    \end{equation*}
+    由于$m(E_1)<\infty$，且对于任意$k>1$，有$E_k\subset E_1,m(E_k)<\infty$。综上，我们有
+    \begin{equation*}
+        m(E)=m(\cap_{n=1}^\infty E_n)=\lim_{N\to\infty}m(E_{N+1})=\lim_{N\to\infty}m(E_{N}).
+    \end{equation*}
 \end{proof}
 (iii) Give a counterexample to show that in the hypothesis that at least one of the $m(E_n)$ is finite in the downward monotone convergence theorem cannot be dropped.
 \begin{proof}
-    
+    令$E_n=(n,\infty)\subset \mathbb{R}$。对于任意$k\geq 1$，我们有$m(E_K)=\infty$。同时，令$E=\cap_{n=1}^\infty E_n$，$\forall x\in \mathbb{R}$，存在$N\in\mathbb{N}$，使得
+    \begin{equation*}
+        x<N,\;\;\; x\notin E_N.
+    \end{equation*}
+    故$E=\emptyset,m(E)=0$。综上$m(E)=m(\cap_{n=1}^\infty E_n)\neq \lim_{n\to\infty}m(E_n)$。
 \end{proof}
 
 
@@ -81,7 +115,7 @@ where $(m^d)^*$ denotes $d$-dimensional Lebesgue measure, etc.
 \begin{proof}
     
 \end{proof}
-(ii) Let $E\subset \mathbb{R}^d, F\subset \mathbb{R}^{d^\prime}$ be Lebesgue measurable sets. Show that $E\times F\subset \mathbb{R}^{d+d^\prime}$ is Lebesgue measurable, with $m^{d+d^\prime}(E\times F)=m^d(E) \dot m^{d^\prime}(F)$. (Note that we allow $E$ or $F$ to have infinite measure, and so one may have to divide into cases or take advantage of the monotone convergence theorem for Lebesgue measure, Exercise 1.2.11)
+(ii) Let $E\subset \mathbb{R}^d, F\subset \mathbb{R}^{d^\prime}$ be Lebesgue measurable sets. Show that $E\times F\subset \mathbb{R}^{d+d^\prime}$ is Lebesgue measurable, with $m^{d+d^\prime}(E\times F)=m^d(E) · m^{d^\prime}(F)$. (Note that we allow $E$ or $F$ to have infinite measure, and so one may have to divide into cases or take advantage of the monotone convergence theorem for Lebesgue measure, Exercise 1.2.11)
 \begin{proof}
     
 \end{proof}
