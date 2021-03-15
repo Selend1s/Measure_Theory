@@ -42,7 +42,7 @@
 \geometry{a4paper,left=2.5cm,right=2.5cm,top=3cm,bottom=3cm}
 
 
-\title{\textbf{测度论导论第一章第一节习题}}
+\title{\textbf{测度论导论\S1.2习题}}
 \author{丁\;\;\; 珍}
     % \address{201940100486}
 \author{程预敏}
@@ -50,10 +50,10 @@
 
 \begin{document}
 \maketitle
-\section{Solution of EX 1.2.11}
-(i) (Upward monotone convergence) Let $E_1\subset E_2\subset \dots \subset \mathbb{R}^n$ be a countable non-decreasing sequence of Lebesgue measurable sets. Show shta $m(\cup_{n=1}^\infty E_n)=\lim_{n\to\infty} m(E_n)$. (\textit{Hint:} Express $\cup_{n=1}^\infty E_n$ as the countable union of the lacunae $E_n\backslash \cup_{n^\prime=1}^{n-1} E_{n^\prime}$.)
+\section{Solution of Ex 1.2.11}
+(i) (Upward monotone convergence) Let $E_1\subset E_2\subset \dots \subset \mathbb{R}^n$ be a countable non-decreasing sequence of Lebesgue measurable sets. Show shta $m(\bigcup_{n=1}^\infty E_n)=\lim_{n\to\infty} m(E_n)$. (\textit{Hint:} Express $\bigcup_{n=1}^\infty E_n$ as the countable union of the lacunae $E_n\backslash \bigcup_{n^\prime=1}^{n-1} E_{n^\prime}$.)
 \begin{proof}
-    记$E=\cup_{n=1}^\infty E_n$。对于任意$k\geq 2$，令
+    记$E=\bigcup_{n=1}^\infty E_n$。对于任意$k\geq 2$，令
     \begin{equation*}
         G_1=E_1,\;\;\; G_2=E_2-E_1, \cdots, G_k=E_k-E_{k-1}.
     \end{equation*}
@@ -66,9 +66,9 @@
         m(\bigcup_{n=1}^\infty E_n)=m(E)=\sum_{k=1}^\infty m(G_k)=\lim_{N\to\infty} \sum_{k=1}^N m(G_k)=\lim_{N\to\infty}m\biggl(\bigcup_{k=1}^N G_k\biggr)=\lim_{N\to\infty}m(E_N).
     \end{equation*}
 \end{proof}
-(ii) (Downward monotone convergence) Let $\mathbb{R}^d \supset E_1 \supset E_2\supset \dots$ be a countable non-increasing sequence of Lebesgue measurable sets. If at least one of the $m(E_n)$ is finite, show that $m(\cap_{n=1}^\infty E_n)=\lim_{n\to \infty} m(E_n)$.
+(ii) (Downward monotone convergence) Let $\mathbb{R}^d \supset E_1 \supset E_2\supset \dots$ be a countable non-increasing sequence of Lebesgue measurable sets. If at least one of the $m(E_n)$ is finite, show that $m(\bigcap_{n=1}^\infty E_n)=\lim_{n\to \infty} m(E_n)$.
 \begin{proof}
-    记$E=\cap_{n=1}^\infty E_n$。不失一般性，我们假设$m(E_1)<\infty$。令
+    记$E=\bigcap_{n=1}^\infty E_n$。不失一般性，我们假设$m(E_1)<\infty$。令
     \begin{equation*}
         G_1=E_1-E_2,\;\;\; G_2=E_2-E_3, \cdots, G_k=E_k-E_{k+1}.
     \end{equation*}
@@ -86,42 +86,64 @@
     \end{equation*}
     由于$m(E_1)<\infty$，且对于任意$k>1$，有$E_k\subset E_1,m(E_k)<\infty$。综上，我们有
     \begin{equation*}
-        m(E)=m(\cap_{n=1}^\infty E_n)=\lim_{N\to\infty}m(E_{N+1})=\lim_{N\to\infty}m(E_{N}).
+        m(E)=m(\bigcap_{n=1}^\infty E_n)=\lim_{N\to\infty}m(E_{N+1})=\lim_{N\to\infty}m(E_{N}).
     \end{equation*}
 \end{proof}
 (iii) Give a counterexample to show that in the hypothesis that at least one of the $m(E_n)$ is finite in the downward monotone convergence theorem cannot be dropped.
 \begin{proof}
-    令$E_n=(n,\infty)\subset \mathbb{R}$。对于任意$k\geq 1$，我们有$m(E_K)=\infty$。同时，令$E=\cap_{n=1}^\infty E_n$，$\forall x\in \mathbb{R}$，存在$N\in\mathbb{N}$，使得
+    令$E_n=(n,\infty)\subset \mathbb{R}$。对于任意$k\geq 1$，我们有$m(E_K)=\infty$。同时，令$E=\bigcap_{n=1}^\infty E_n$，$\forall x\in \mathbb{R}$，存在$N\in\mathbb{N}$，使得
     \begin{equation*}
         x<N,\;\;\; x\notin E_N.
     \end{equation*}
-    故$E=\emptyset,m(E)=0$。综上$m(E)=m(\cap_{n=1}^\infty E_n)\neq \lim_{n\to\infty}m(E_n)$。
+    故$E=\emptyset,m(E)=0$。综上$m(E)=m(\bigcap_{n=1}^\infty E_n)\neq \lim_{n\to\infty}m(E_n)$。
 \end{proof}
 
 
-\section{Solution of EX 1.2.12}
+\section{Solution of Ex 1.2.12}
 Show that any map $E\to m(E)$ from Lebesgue measurable sets to elements of $[0,+\infty]$ that obeys the above empty set and countable additivity axioms will also obey the monotinicity and countable subadditivity axioms from Exercise 1.2.3, when restricted to Lebesgue measurable sets of course.
 \begin{proof}
-    
+    (i) 单调性。 令$E,G$是两个Lebesgue可测集，且$G\subset E\subset \mathbb{R}^d$。设$f$是从Lebesgue可测集到$\overline{\mathbb{R}^+}$的满足空集和可数可加性公理的映射。不妨设$f(G)<\infty$。根据可数可加性和空集公理，我们有
+    \begin{equation*}
+        f(E)=f(G)+f(E\backslash G).
+    \end{equation*}
+    由于$E\backslash G$是Lebesgue可测集，则$f(E\backslash G)\geq 0$。于是，我们有$f(E)\geq f(G)$。若$f(G)=\infty$，显然有$f(E)=\infty\geq f(G)$。
+
+    (ii) 可数次可加性。令$E_1,E_2,\cdots \subset \mathbb{R}^d$是一个可数的Lebesgue可测集序列，且对于任意$n\in\mathbb{N}^+$有$f(E_n)<\infty$。同时记$\bigcup_{n=1}^\infty E_n=E$。此外，令Lebesgue可测集序列$\{G_k\}$由下定义：
+    \begin{equation*}
+        G_1=E_1,\;\;\; G_k=E_k\backslash\bigcup_{n^\prime=1}^{k-1} E_{n^\prime}:\;\; \forall k\geq 2.
+    \end{equation*}
+    显然，$\{G_k\}$是可数的不交的Lebesgue可测集序列，且对于任意$N\in \mathbb{N}^+$，有$\bigcup_{k=1}^N E_k=\bigcup_{k=1}^N G_k$。由$f$的可数可加性，我们有
+    \begin{equation*}
+        f(E)=f(\bigcup_{k=1}^\infty E_k)=f(\bigcup_{k=1}^\infty G_k)=\lim_{N\to\infty}\sum_{k=1}^N f(G_k).
+    \end{equation*}
+    另一方面，对于任意$N\in \mathbb{N}^+$，有$G_k\subset E_k$，根据$f$的单调性，我们有
+    \begin{equation*}
+        f(E_k)\geq f(G_k):\;\;\;\forall k\in \mathbb{N}^+.
+    \end{equation*}
+    综上，我们有
+    \begin{equation*}
+        f(E)=f(\bigcup_{k=1}^\infty E_k)=\lim_{N\to\infty}\sum_{k=1}^N f(G_k)\leq \lim_{N\to\infty}\sum_{k=1}^N f(E_k).
+    \end{equation*}
+    若$\exists n_0\in \mathbb{N}^+$使得$f(E_{n_0})=\infty$，显然有$f(E)\leq \sum_{k=1}^\infty f(E_k)$成立。
 \end{proof}
 
 
-\section{Solution of EX 1.2.22}
-Let $d,d^\prime\geq 1$ be natural numbers. (i) If $E\subset \mathbb{R}^{d^\prime}$, show that 
+\section{Solution of Ex 1.2.22}
+Let $d,d^\prime\geq 1$ be natural numbers. (i) If $E\subset \mathbb{R}^d$ and $F\subset \mathbb{R}^{d^\prime}$, show that 
 \begin{equation*}
     (m^{d+d^\prime})^*(E\times F)\leq (m^d)^*(E)\times (m^{d^\prime})^*(F),
 \end{equation*}
-where $(m^d)^*$ denotes $d$-dimensional Lebesgue measure, etc.
+where $(m^d)^*$ denotes $d$-dimensional Lebesgue outer measure, etc.      
 \begin{proof}
-    
+    123116544534534
 \end{proof}
-(ii) Let $E\subset \mathbb{R}^d, F\subset \mathbb{R}^{d^\prime}$ be Lebesgue measurable sets. Show that $E\times F\subset \mathbb{R}^{d+d^\prime}$ is Lebesgue measurable, with $m^{d+d^\prime}(E\times F)=m^d(E) · m^{d^\prime}(F)$. (Note that we allow $E$ or $F$ to have infinite measure, and so one may have to divide into cases or take advantage of the monotone convergence theorem for Lebesgue measure, Exercise 1.2.11)
+(ii) Let $E\subset \mathbb{R}^d, F\subset \mathbb{R}^{d^\prime}$ be Lebesgue measurable sets. Show that $E\times F\subset \mathbb{R}^{d+d^\prime}$ is Lebesgue measurable, with $m^{d+d^\prime}(E\times F)=m^d(E) · m^{d^\prime}(F)$. (Note that we allow $E$ or $F$ to have infinite measure, and so one may have to divide into cases or take advantage of the monotone convergence theorem for Lebesgue measure, Exercise 1.2.11.)
 \begin{proof}
     
 \end{proof}
 
 
-\section{Solution of EX 1.2.23}
+\section{Solution of Ex 1.2.23}
 (Uniqueness of Lebesgue measure). Show that Lebesgue measure $E\to m(E)$ is the only map from Lebesgue measurable sets to $[0,+\infty]$ that obeys the following axioms:
 
 (i) (Empty set) $m(\emptyset) =0$.
