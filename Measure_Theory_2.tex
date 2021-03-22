@@ -105,6 +105,8 @@
 \end{proof}
 
 
+
+
 \section{Solution of Ex 1.2.12}
 Show that any map $E\to m(E)$ from Lebesgue measurable sets to elements of $[0,+\infty]$ that obeys the above empty set and countable additivity axioms will also obey the monotinicity and countable subadditivity axioms from Exercise 1.2.3, when restricted to Lebesgue measurable sets of course.
 \begin{proof}
@@ -131,6 +133,19 @@ Show that any map $E\to m(E)$ from Lebesgue measurable sets to elements of $[0,+
         f(E)=f(\bigcup_{k=1}^\infty E_k)=\lim_{N\to\infty}\sum_{k=1}^N f(G_k)\leq \lim_{N\to\infty}\sum_{k=1}^N f(E_k).
     \end{equation*}
     若$\exists n_0\in \mathbb{N}^+$使得$f(E_{n_0})=\infty$，显然有$f(E)\leq \sum_{k=1}^\infty f(E_k)$成立。
+\end{proof}
+
+\section{Solution of Ex 1.2.14}
+Let $E\subset \mathbb{R}^d$. Show that $E$ is contained in a Lebesgue measurable sett of measure exactly equal to $m^*(E)$.
+\begin{proof}
+    若$m^*(E)=\infty$，令$U=\mathbb{R}^d\supset E$，$m(U)=\infty=m^*(E)$成立。
+    
+    若$m^*(E)<\infty$。由外测度定义，任给$\epsilon>0$和$i\in\mathbb{N}^+$，存在开集$U_i\supset E$，且$m(U_i)\leq m^*(E)+\frac{1}{i}$。
+    令$S=\bigcap_{i=1}^\infty U_i$是可测集。显然，对于任意$i\in\mathbb{N}^+$，$U_i\supset E$，故$S\supset E$，$m(S)=m^*(S)\geq m^*(E)$。另一方面，对于任意$\epsilon>0$，存在$i_\epsilon\in \mathbb{N}$，使得$\frac{1}{i_\epsilon}\leq \epsilon$。这时，我们有
+    \begin{equation*}
+        S\subset U_{i_\epsilon},\;\;\; m(S)\leq m(U_{i_\epsilon})\leq m^*(E)+\frac{1}{i_\epsilon}\leq m^*(E)+\epsilon.
+    \end{equation*}
+    由$\epsilon$的任意性，我们有$S\supset E$且$m(S)=m^*(E)$。
 \end{proof}
 
 
@@ -262,16 +277,16 @@ where $(m^d)^*$ denotes $d$-dimensional Lebesgue outer measure, etc.
 
     设$E$是一个Lebesgue可测集，由Lebesgue外测度的定义，我们有
     \begin{equation*}
-        m(E)=m^*(E)=\inf_{E\subset U,\ U\ \mathrm{open}} m(U)=m(\bigcap_{E\subset U,\ U\ \mathrm{open}}U).
+        m(E)=m^*(E)=\inf_{E\subset U,\ U\ \mathrm{open}} m(U).
     \end{equation*}
-    记$S=\bigcap_{\{E\subset U,\ U\ \mathrm{open}\}}U$，显然，我们有$S\supset E$是一个开集，故
+    对任意$\epsilon>0$，令$S\supset E$是一个开集，且$m(S)\leq m(E)+\epsilon$。故
     \begin{equation}
-        f(E)\leq f(S)=m(S)=m(E).
+        f(E)\leq f(S)=m(S)\leq m(E)+\epsilon.
         \label{upper}
     \end{equation}
-    设$E$是任意可测集。对于任意$\epsilon>0$，存在一个开集$U\supset E$，且$m(U\backslash E)\leq \epsilon$。
+    由$\epsilon$的任意性，我们有$f(E)\leq m(E)$。另一方面
     \begin{equation}
-        f(E)=f(U)-f(U\backslash E)=m(U)-f(U\backslash E)\geq m(U)-m(U\backslash E)=m(E).
+        f(E)=f(S)-f(S\backslash E)=m(S)-f(S\backslash E)\geq m(S)-m(S\backslash E)=m(E).
         \label{lower}
     \end{equation}
     结合 \eqref{upper} 和 \eqref{lower}，我们可知，$f$和勒贝格测度$m$在可测集上等价。
