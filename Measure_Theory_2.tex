@@ -22,7 +22,13 @@
             colorlinks=true,
             linkcolor=blue,
             anchorcolor=black,
-            citecolor=black}
+            citecolor=black,
+            pdfauthor={丁珍，程预敏},%
+            pdftitle={测度论练习题2},%
+            pdfsubject={概率论},
+            pdfkeywords={测度论，Lebesgue测度},
+            pdfproducer={LaTeX},%
+            pdfcreator={xeLaTeX}}
 
 \usepackage{mathrsfs}
 %\usepackage{ntheorem}
@@ -130,16 +136,108 @@ Show that any map $E\to m(E)$ from Lebesgue measurable sets to elements of $[0,+
 
 \section{Solution of Ex 1.2.22}
 Let $d,d^\prime\geq 1$ be natural numbers. (i) If $E\subset \mathbb{R}^d$ and $F\subset \mathbb{R}^{d^\prime}$, show that 
-\begin{equation*}
+\begin{equation}
     (m^{d+d^\prime})^*(E\times F)\leq (m^d)^*(E)\times (m^{d^\prime})^*(F),
-\end{equation*}
+    \label{outer_ineq}
+\end{equation}
 where $(m^d)^*$ denotes $d$-dimensional Lebesgue outer measure, etc.      
 \begin{proof}
-    123116544534534
+    (1) 若$E,F$中有一集合外测度为$\infty$且另一集合外测度不为零，则上式显然成立。
+    
+    (2) 故我们首先考虑$E,F$的Lebesgue外测度均有限的情况。令$O_E,O_F$是两个开集，且对于任意$\epsilon>0$满足如下条件
+    \begin{equation*}
+        \begin{split}
+            O_E&\supset E,\;\;\; (m^d)(O_E)=(m^d)^*(O_E)\leq (m^d)^*(E)+\epsilon;\\
+            O_F&\supset F,\;\;\; (m^{d^\prime})(O_F)=(m^{d^\prime})^*(O_F)\leq (m^{d^\prime})^*(F)+\epsilon.
+        \end{split}
+    \end{equation*}
+    根据Lemma 1.2.11，开集$O_E,O_F$可以表示为几乎不交的闭的cubes的可数并
+    \begin{equation*}
+        O_E=\bigcup_{i=1}^\infty B_i,\;\;\; O_F=\bigcup_{j=1}^\infty B^\prime_j,
+    \end{equation*}
+    其中$B_i$是$\mathbb{R}^d$中的闭cube，$B^\prime_j$是$\mathbb{R}^{d^\prime}$中的闭cube。任给$x\in E\times F\subset \mathbb{R}^{d+d^\prime}$，$x\in O_E\times O_F$。则$E\times F$是开集$O_E\times O_F$的子集，故
+    \begin{equation*}
+        (m^{d+d^\prime})^*(E\times F)\leq (m^{d+d^\prime})^*(O_E\times O_F)=(m^{d+d^\prime})^*(\bigcup_{i,j=1}^\infty B_i\times B^\prime_j).
+    \end{equation*}
+    由于$B_i,B^{\prime}_j$都是几乎不交的闭的cube，则
+    \begin{equation*}
+        \begin{split}
+            (m^{d+d^\prime})^*(\bigcup_{i,j=1}^\infty B_i\times B^\prime_j)&=\sum_{i=1}^\infty \sum_{j=1}^\infty (m^d)^*(B_i)\cdot (m^{d^\prime})^*(B^\prime_j)=(m^d)^*(O_E)\cdot (m^{d^\prime})^*(O_F)\\
+            &\leq (m^d)^*(E)\times (m^{d^\prime})^*(F)+\epsilon\cdot\bigl((m^d)^*(E)+(m^{d^\prime})(F)\bigr)+\epsilon^2.
+        \end{split}
+    \end{equation*}
+    由$\epsilon$的任意性，我们有 \eqref{outer_ineq} 成立。
+    
+    (3) 若$E,F$中有一集合外测度为$\infty$且另一集合外测度为零，不妨设$(m^d)^*(E)=\infty$且$(m^{d^\prime})^*(F)=(m^{d^\prime})(F)=0$，这时，记$\{K_n\}$为如下序列
+    \begin{equation*}
+        K_n=F\cap B_n(O),\;\;\;\forall n\in\mathbb{N}^+,
+    \end{equation*}
+    其中$B_n(O)$是以原点为中心，半径为$n$的开球。这时，我们有
+    \begin{equation*}
+        F=\bigcup_{n=1}^\infty K_n,\;\;\; K_n\subset K_{n+1},\;\;\; \forall n\geq 1.
+    \end{equation*}
+    令$O_E\supset E$是一个开集，则
+    \begin{equation}
+        \begin{split}
+            (m^{d+d^\prime})^*(E\times F)&\leq(m^{d+d^\prime})(O_E\times F)\\
+            &=(m^d)^*(O_E)\cdot (m^{d^\prime})^*(F)\\
+            &=(m^d)^*(O_E)\cdot \lim_{n\to\infty}(m^{d^\prime})^*(K_n)\\
+            &=(m^d)^*(O_E)\cdot 0=0.
+            \label{zero}
+        \end{split}
+    \end{equation}
 \end{proof}
+
 (ii) Let $E\subset \mathbb{R}^d, F\subset \mathbb{R}^{d^\prime}$ be Lebesgue measurable sets. Show that $E\times F\subset \mathbb{R}^{d+d^\prime}$ is Lebesgue measurable, with $m^{d+d^\prime}(E\times F)=m^d(E) · m^{d^\prime}(F)$. (Note that we allow $E$ or $F$ to have infinite measure, and so one may have to divide into cases or take advantage of the monotone convergence theorem for Lebesgue measure, Exercise 1.2.11.)
 \begin{proof}
-    
+    (1) 我们从一个有限测度的特殊情况开始。假设$E,F$是两个可测集，且$m(E),m(F)<\infty$。对于任意$\epsilon>0$，根据上一小题的结论，存在开集$O_E,O_F$使得
+    \begin{equation*}
+        \begin{split}
+            O_E&\supset E,\;\;\; (m^d)(O_E)\leq (m^d)(E)+\epsilon;\\
+            O_F&\supset F,\;\;\; (m^{d^\prime})(O_F)\leq (m^{d^\prime})(F)+\epsilon.
+        \end{split}
+    \end{equation*}
+    另一方面，存在紧集$K_E,K_F$使得
+    \begin{equation*}
+        \begin{split}
+            K_E&\subset E,\;\;\; (m^d)(K_E)\geq (m^d)(E)-\epsilon;\\
+            K_F&\subset F,\;\;\; (m^{d^\prime})(K_F)\geq (m^{d^\prime})(F)-\epsilon.
+        \end{split}
+    \end{equation*}
+    显然，我们有$(K_E\times K_F)\subset (E\times F)\subset (O_E\times O_F)$，且$K_E\times K_F$是$\mathbb{R}^{d+d^\prime}$中的紧集，故它可测，同时
+    \begin{equation*}
+        (m^{d+d^\prime})(K_E\times K_F)\geq (m^d)(E)\times (m^{d^\prime})(F)-\epsilon\cdot\bigl((m^d)(E)+(m^{d^\prime})(F)\bigr)+\epsilon^2.
+    \end{equation*}
+    另一方面，$(O_E\times O_F)\backslash (E\times F)\subset (O_E\times O_F)\backslash (K_E\times K_F)$，且
+    \begin{equation*}
+        \begin{split}
+            (m^{d+d^\prime})^*\bigl((O_E\times O_F)\backslash (E\times F)\bigr)&\leq (m^{d+d^\prime})\bigl((O_E\times O_F)\backslash (K_E\times K_F)\bigr)\\
+            &=(m^{d+d^\prime})(O_E\times O_F)-(m^{d+d^\prime})(K_E\times K_F)\\
+            &\leq 2\epsilon\cdot\bigl((m^d)(E)+(m^{d^\prime})(F)\bigr).
+        \end{split}
+    \end{equation*}
+    由$\epsilon$的任意性，我们可知$E\times F$是$\mathbb{R}^{d+d^\prime}$中的可测集，且
+    \begin{equation*}
+        (m^{d+d^\prime})(E\times F)=(m^d)(E)\times (m^{d^\prime})(F).
+    \end{equation*}
+    (2) 由 \eqref{zero} 可知，若$E,F$中有一集合测度为$\infty$且另一集合测度为零，则
+    \begin{equation*}
+        (m^{d+d^\prime})(E\times F)=(m^{d+d^\prime})^*(E\times F)=(m^d)(E)\times (m^{d^\prime})(F)=0.
+    \end{equation*}
+    (3) 若$E,F$中有一集合测度为$\infty$且另一集合测度不为零，不妨设$(m^d)^*(E)=\infty$且$(m^{d^\prime})(F)\neq 0$，这时令序列$\{S_n\}$如下定义：
+    \begin{equation*}
+        S_n=E\cap B_n(O),\;\;\; n=1,2,\cdots
+    \end{equation*}
+    这时，我们有$S_n\subset S_{n+1},\forall n\geq 1$, 且$E=\bigcup_{n=1}^\infty S_n$。同时，令$K_F\subset F$是一紧集，且$(m^{d^\prime})(K_F)>0$。这时，我们有
+    \begin{equation*}
+        \begin{split}
+            (m^{d+d^\prime})(E\times K_F)=\lim_{n\to\infty}(m^{d+d^\prime})(S_n\times K_F)=\lim_{n\to\infty}(m^d)(S_n)\times (m^{d^\prime})(K_F)=\infty.
+        \end{split}
+    \end{equation*}
+    由单调性，我们可以得到
+    \begin{equation*}
+        (m^{d+d^\prime})(E\times F)=(m^d)(E)\times (m^{d^\prime})(F)=\infty.
+    \end{equation*}
 \end{proof}
 
 
@@ -148,13 +246,35 @@ where $(m^d)^*$ denotes $d$-dimensional Lebesgue outer measure, etc.
 
 (i) (Empty set) $m(\emptyset) =0$.
 
-(ii) (Countable additivity) If $E_1,E_2,\dots \subset \mathbb{R}^d$ is a countable sequence of disjoint Lebesgue measurable sets, then $m(\cup_{n=1}^\infty E_n)\sum_{n=1}^\infty m(E_n)$.
+(ii) (Countable additivity) If $E_1,E_2,\dots \subset \mathbb{R}^d$ is a countable sequence of disjoint Lebesgue measurable sets, then $m(\cup_{n=1}^\infty E_n)=\sum_{n=1}^\infty m(E_n)$.
 
 (iii) (Translation invariance) If $E$ is Lebesgue measurable and $x\in \mathbb{R}^d$, then $m(E+x)=m(E)$.
 
 (iv) (Normalisation) $m([0,1]^d)=1$.
 \begin{proof}
-    
+    设$f:E\to f(E)$是一个从Lebesgue可测集到$[0,+\infty]$的映射，且满足上面的测度公理。由Exercise 1.2.8可知，基本集是Lebesgue可测集，且对于任意基本集$E$，$m(E)=m^{(J)}(E)$。另一方面，由Exercise 1.1.3可知，基本集上满足非负性、有限可加性和平移不变性的测度具有唯一性，且在相差一个常数系数的情况下等价。因此，我们考虑将$f$限制在基本集上。$f([0,1]^d)=1$，且$f$满足上面的三条性质，故$f$在基本集上与Lebesgue测度$m$等价。
+
+    设$E$是一个开集，则$E=\bigcup_{i=1}^\infty Q_i$，其中$Q_i$是$d$维几乎不交的闭cube。由于$Q_i$是几乎不交的闭cube，则$Q_i$是基本集，且
+    \begin{equation*}
+        f(Q_i)=m(Q_i),\;\;\; f(E)=\sum_{i=1}^\infty f(Q_i)=\sum_{i=1}^\infty m(Q_i)=m(E).
+    \end{equation*}
+    故$f$和$m$在开集上等价。
+
+    设$E$是一个Lebesgue可测集，由Lebesgue外测度的定义，我们有
+    \begin{equation*}
+        m(E)=m^*(E)=\inf_{E\subset U,\ U\ \mathrm{open}} m(U)=m(\bigcap_{E\subset U,\ U\ \mathrm{open}}U).
+    \end{equation*}
+    记$S=\bigcap_{\{E\subset U,\ U\ \mathrm{open}\}}U$，显然，我们有$S\supset E$是一个开集，故
+    \begin{equation}
+        f(E)\leq f(S)=m(S)=m(E).
+        \label{upper}
+    \end{equation}
+    设$E$是任意可测集。对于任意$\epsilon>0$，存在一个开集$U\supset E$，且$m(U\backslash E)\leq \epsilon$。
+    \begin{equation}
+        f(E)=f(U)-f(U\backslash E)=m(U)-f(U\backslash E)\geq m(U)-m(U\backslash E)=m(E).
+        \label{lower}
+    \end{equation}
+    结合 \eqref{upper} 和 \eqref{lower}，我们可知，$f$和勒贝格测度$m$在可测集上等价。
 \end{proof}
 
 
