@@ -136,7 +136,7 @@ Show that any map $E\to m(E)$ from Lebesgue measurable sets to elements of $[0,+
 \end{proof}
 
 \section{Solution of Ex 1.2.14}
-Let $E\subset \mathbb{R}^d$. Show that $E$ is contained in a Lebesgue measurable sett of measure exactly equal to $m^*(E)$.
+Let $E\subset \mathbb{R}^d$. Show that $E$ is contained in a Lebesgue measurable set of measure exactly equal to $m^*(E)$.
 \begin{proof}
     若$m^*(E)=\infty$，令$U=\mathbb{R}^d\supset E$，$m(U)=\infty=m^*(E)$成立。
     
@@ -149,6 +149,44 @@ Let $E\subset \mathbb{R}^d$. Show that $E$ is contained in a Lebesgue measurable
 \end{proof}
 
 
+\section{Solution of Ex 1.2.15}
+(Inner regularity). Let $E\subset \mathbb{R}^d$ be Lebesgue measurable. Show that 
+\begin{equation*}
+    m(E)=\sup_{K\subset E,\ K\ \mathrm{compact}} m(K).
+\end{equation*}
+\begin{proof}
+    对于$E$的任意紧子集$K$，$m(E)\geq m(K)$显然成立。故我们下面证明
+    \begin{equation}
+        m(E)\leq\sup_{K\subset E,\ K\ \mathrm{compact}} m(K)
+        \label{bound}
+    \end{equation}
+
+    (1) 当$E$是有界集时。令$C$是包含$E$的一个有界闭集，对于任意$\epsilon>0$。由Lebesgue测度的外正则性，存在一个开集$U\supset (C\backslash E)$，且
+    \begin{equation}
+        m(U)<m(C\backslash E) +\epsilon.
+        \label{open}
+    \end{equation}
+    令$K=C\backslash U$，则$K$是一个$E$的紧子集。此外，根据Lebesgue测度的单调性，我们有
+    \begin{equation}
+        m(C)\leq m(K)+m(U).
+        \label{close}
+    \end{equation}
+    综合 \eqref{open} 和 \eqref{close}两式，我们可以得到
+    \begin{equation*}
+        \begin{split}
+            m(E)&+m(C\backslash E)=m(C)\leq m(K)+m(C\backslash E) +\epsilon,\\
+            m(E)&\leq m(K)+\epsilon.
+        \end{split}
+    \end{equation*}
+    根据$\epsilon$的任意性，我们可以得到 \eqref{bound}。
+
+    (2) 当$E$不是有界集时。对于任意$M<m(E)$，我们可以找到$E$的一个紧子集$K$，且$m(K)>M$:\\令$E_i=E\bigcap \overline{B_i(O)}$，其中$\overline{B_i(O)}$是以原点为中心，半径为$i$的闭球。则对于任意$i\in\mathbb{N}^+$，
+    \begin{equation*}
+        E_i\subset E_{i+1},\;\;\; m(E)=\lim_{i\to\infty} m(E_i).
+    \end{equation*}
+    故存在一个$i_0$使得$m(E_{i_0})>M$，且$E_{i_0}$有界。由(1)可以找到紧集$K\subset E_{i_0}\subset E$使得$m(K)>M$。根据$M$的任意性，我们可以得到 \eqref{bound}。
+
+\end{proof}
 \section{Solution of Ex 1.2.22}
 Let $d,d^\prime\geq 1$ be natural numbers. (i) If $E\subset \mathbb{R}^d$ and $F\subset \mathbb{R}^{d^\prime}$, show that 
 \begin{equation}
