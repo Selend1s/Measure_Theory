@@ -1,0 +1,335 @@
+\documentclass[reqno,a4paper,14pt]{amsart}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{ctex}
+\usepackage{mathtools}
+\newcommand\me{\mathrm{e}}
+\newcommand\mi{\mathrm{i}}
+\usepackage{mathtools}
+%\usepackage[greek,english]{babel}
+\usepackage{amssymb}
+\newcommand\dif{\,\mathrm{d}}
+\newcommand\mE{\mathbb{E}}
+\newcommand\Pro{\mathbb{P}}
+\newcommand{\Kov}{柯尔莫戈洛夫}
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\usepackage{hyperref}
+\hypersetup{hypertex=true,
+            colorlinks=true,
+            linkcolor=blue,
+            anchorcolor=black,
+            citecolor=black,
+            pdfauthor={丁珍，程预敏},%
+            pdftitle={测度论练习题2},%
+            pdfsubject={概率论},
+            pdfkeywords={测度论，Lebesgue测度},
+            pdfproducer={LaTeX},%
+            pdfcreator={xeLaTeX}}
+
+\usepackage{mathrsfs}
+%\usepackage{ntheorem}
+%\theoremsymbol{\mbox{$\box$}}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{example}{例}
+\newtheorem{remark}[theorem]{注}
+\newtheorem*{prove}{\textbf{解}}
+\newenvironment{solution}{\begin{proof}[\indent\bf 解]}{\end{proof}}
+\renewcommand{\proofname}{\indent\bf 证明}
+\newtheorem*{thm2}{Proof of Theorem 2.2}
+\usepackage{geometry}
+\geometry{a4paper,left=2.5cm,right=2.5cm,top=3cm,bottom=3cm}
+
+
+\title{\textbf{测度论导论\S1.3习题}}
+\author{丁\;\;\; 珍}
+    % \address{201940100486}
+\author{程预敏}
+    % \address{201940100447}
+
+\begin{document}
+\maketitle
+\section{Solution of Ex 1.2.11}
+(i) (Upward monotone convergence) Let $E_1\subset E_2\subset \dots \subset \mathbb{R}^n$ be a countable non-decreasing sequence of Lebesgue measurable sets. Show shta $m(\bigcup_{n=1}^\infty E_n)=\lim_{n\to\infty} m(E_n)$. (\textit{Hint:} Express $\bigcup_{n=1}^\infty E_n$ as the countable union of the lacunae $E_n\backslash \bigcup_{n^\prime=1}^{n-1} E_{n^\prime}$.)
+\begin{proof}
+    记$E=\bigcup_{n=1}^\infty E_n$。对于任意$k\geq 2$，令
+    \begin{equation*}
+        G_1=E_1,\;\;\; G_2=E_2-E_1, \cdots, G_k=E_k-E_{k-1}.
+    \end{equation*}
+    根据Lemma 1.2.13，对于任意$k\geq 1$，$G_k$ 是两两不交的可测集，且
+    \begin{equation*}
+        E_n=\bigcup_{k=1}^n G_k,\;\;\; E=\bigcup_{k=1}^\infty G_k.
+    \end{equation*}
+    因此
+    \begin{equation*}
+        m(\bigcup_{n=1}^\infty E_n)=m(E)=\sum_{k=1}^\infty m(G_k)=\lim_{N\to\infty} \sum_{k=1}^N m(G_k)=\lim_{N\to\infty}m\biggl(\bigcup_{k=1}^N G_k\biggr)=\lim_{N\to\infty}m(E_N).
+    \end{equation*}
+\end{proof}
+(ii) (Downward monotone convergence) Let $\mathbb{R}^d \supset E_1 \supset E_2\supset \dots$ be a countable non-increasing sequence of Lebesgue measurable sets. If at least one of the $m(E_n)$ is finite, show that $m(\bigcap_{n=1}^\infty E_n)=\lim_{n\to \infty} m(E_n)$.
+\begin{proof}
+    记$E=\bigcap_{n=1}^\infty E_n$。不失一般性，我们假设$m(E_1)<\infty$。令
+    \begin{equation*}
+        G_1=E_1-E_2,\;\;\; G_2=E_2-E_3, \cdots, G_k=E_k-E_{k+1}.
+    \end{equation*}
+    根据Lemma 1.2.13，对于任意$k\geq 1$，$G_k$ 是两两不交的可测集，且
+    \begin{equation*}
+        E_1=E\cup \bigcup_{k=1}^\infty G_k
+    \end{equation*}
+    是一个可测集的不交并。由此，我们有
+    \begin{equation*}
+        \begin{split}
+            m(E_1)&=m(E)+\sum_{k=1}^\infty m(G_k)=m(E)+\lim_{N\to\infty} \sum_{k=1}^N m(G_k)\\
+            &=m(E)+\lim_{N\to\infty}\sum_{k=1}^N\bigl(m(E_k)-m(E_{K+1})\bigr)\\
+            &=m(E)+m(E_1)-\lim_{N\to\infty}m(E_{N+1}).
+        \end{split}
+    \end{equation*}
+    由于$m(E_1)<\infty$，且对于任意$k>1$，有$E_k\subset E_1,m(E_k)<\infty$。综上，我们有
+    \begin{equation*}
+        m(E)=m(\bigcap_{n=1}^\infty E_n)=\lim_{N\to\infty}m(E_{N+1})=\lim_{N\to\infty}m(E_{N}).
+    \end{equation*}
+\end{proof}
+(iii) Give a counterexample to show that in the hypothesis that at least one of the $m(E_n)$ is finite in the downward monotone convergence theorem cannot be dropped.
+\begin{proof}
+    令$E_n=(n,\infty)\subset \mathbb{R}$。对于任意$k\geq 1$，我们有$m(E_K)=\infty$。同时，令$E=\bigcap_{n=1}^\infty E_n$，$\forall x\in \mathbb{R}$，存在$N\in\mathbb{N}$，使得
+    \begin{equation*}
+        x<N,\;\;\; x\notin E_N.
+    \end{equation*}
+    故$E=\emptyset,m(E)=0$。综上$m(E)=m(\bigcap_{n=1}^\infty E_n)\neq \lim_{n\to\infty}m(E_n)$。
+\end{proof}
+
+
+
+
+\section{Solution of Ex 1.2.12}
+Show that any map $E\to m(E)$ from Lebesgue measurable sets to elements of $[0,+\infty]$ that obeys the above empty set and countable additivity axioms will also obey the monotinicity and countable subadditivity axioms from Exercise 1.2.3, when restricted to Lebesgue measurable sets of course.
+\begin{proof}
+    (i) 单调性。 令$E,G$是两个Lebesgue可测集，且$G\subset E\subset \mathbb{R}^d$。设$f$是从Lebesgue可测集到$\overline{\mathbb{R}^+}$的满足空集和可数可加性公理的映射。不妨设$f(G)<\infty$。根据可数可加性和空集公理，我们有
+    \begin{equation*}
+        f(E)=f(G)+f(E\backslash G).
+    \end{equation*}
+    由于$E\backslash G$是Lebesgue可测集，则$f(E\backslash G)\geq 0$。于是，我们有$f(E)\geq f(G)$。若$f(G)=\infty$，显然有$f(E)=\infty\geq f(G)$。
+
+    (ii) 可数次可加性。令$E_1,E_2,\cdots \subset \mathbb{R}^d$是一个可数的Lebesgue可测集序列，且对于任意$n\in\mathbb{N}^+$有$f(E_n)<\infty$。同时记$\bigcup_{n=1}^\infty E_n=E$。此外，令Lebesgue可测集序列$\{G_k\}$由下定义：
+    \begin{equation*}
+        G_1=E_1,\;\;\; G_k=E_k\backslash\bigcup_{n^\prime=1}^{k-1} E_{n^\prime}:\;\; \forall k\geq 2.
+    \end{equation*}
+    显然，$\{G_k\}$是可数的不交的Lebesgue可测集序列，且对于任意$N\in \mathbb{N}^+$，有$\bigcup_{k=1}^N E_k=\bigcup_{k=1}^N G_k$。由$f$的可数可加性，我们有
+    \begin{equation*}
+        f(E)=f(\bigcup_{k=1}^\infty E_k)=f(\bigcup_{k=1}^\infty G_k)=\lim_{N\to\infty}\sum_{k=1}^N f(G_k).
+    \end{equation*}
+    另一方面，对于任意$N\in \mathbb{N}^+$，有$G_k\subset E_k$，根据$f$的单调性，我们有
+    \begin{equation*}
+        f(E_k)\geq f(G_k):\;\;\;\forall k\in \mathbb{N}^+.
+    \end{equation*}
+    综上，我们有
+    \begin{equation*}
+        f(E)=f(\bigcup_{k=1}^\infty E_k)=\lim_{N\to\infty}\sum_{k=1}^N f(G_k)\leq \lim_{N\to\infty}\sum_{k=1}^N f(E_k).
+    \end{equation*}
+    若$\exists n_0\in \mathbb{N}^+$使得$f(E_{n_0})=\infty$，显然有$f(E)\leq \sum_{k=1}^\infty f(E_k)$成立。
+\end{proof}
+
+\section{Solution of Ex 1.2.14}
+Let $E\subset \mathbb{R}^d$. Show that $E$ is contained in a Lebesgue measurable set of measure exactly equal to $m^*(E)$.
+\begin{proof}
+    若$m^*(E)=\infty$，令$U=\mathbb{R}^d\supset E$，$m(U)=\infty=m^*(E)$成立。
+    
+    若$m^*(E)<\infty$。由外测度定义，任给$\epsilon>0$和$i\in\mathbb{N}^+$，存在开集$U_i\supset E$，且$m(U_i)\leq m^*(E)+\frac{1}{i}$。
+    令$S=\bigcap_{i=1}^\infty U_i$是可测集。显然，对于任意$i\in\mathbb{N}^+$，$U_i\supset E$，故$S\supset E$，$m(S)=m^*(S)\geq m^*(E)$。另一方面，对于任意$\epsilon>0$，存在$i_\epsilon\in \mathbb{N}$，使得$\frac{1}{i_\epsilon}\leq \epsilon$。这时，我们有
+    \begin{equation*}
+        S\subset U_{i_\epsilon},\;\;\; m(S)\leq m(U_{i_\epsilon})\leq m^*(E)+\frac{1}{i_\epsilon}\leq m^*(E)+\epsilon.
+    \end{equation*}
+    由$\epsilon$的任意性，我们有$S\supset E$且$m(S)=m^*(E)$。
+\end{proof}
+
+
+\section{Solution of Ex 1.2.15}
+(Inner regularity). Let $E\subset \mathbb{R}^d$ be Lebesgue measurable. Show that 
+\begin{equation*}
+    m(E)=\sup_{K\subset E,\ K\ \mathrm{compact}} m(K).
+\end{equation*}
+\begin{proof}
+    对于$E$的任意紧子集$K$，$m(E)\geq m(K)$显然成立。故我们下面证明
+    \begin{equation}
+        m(E)\leq\sup_{K\subset E,\ K\ \mathrm{compact}} m(K)
+        \label{bound}
+    \end{equation}
+
+    (1) 当$E$是有界集时。令$C$是包含$E$的一个有界闭集，对于任意$\epsilon>0$。由Lebesgue测度的外正则性，存在一个开集$U\supset (C\backslash E)$，且
+    \begin{equation}
+        m(U)<m(C\backslash E) +\epsilon.
+        \label{open}
+    \end{equation}
+    令$K=C\backslash U$，则$K$是一个$E$的紧子集。此外，根据Lebesgue测度的单调性，我们有
+    \begin{equation}
+        m(C)\leq m(K)+m(U).
+        \label{close}
+    \end{equation}
+    综合 \eqref{open} 和 \eqref{close}两式，我们可以得到
+    \begin{equation*}
+        \begin{split}
+            m(E)&+m(C\backslash E)=m(C)\leq m(K)+m(C\backslash E) +\epsilon,\\
+            m(E)&\leq m(K)+\epsilon.
+        \end{split}
+    \end{equation*}
+    根据$\epsilon$的任意性，我们可以得到 \eqref{bound}。
+
+    (2) 当$E$不是有界集时。对于任意$M<m(E)$，我们可以找到$E$的一个紧子集$K$，且$m(K)>M$:\\令$E_i=E\bigcap \overline{B_i(O)}$，其中$\overline{B_i(O)}$是以原点为中心，半径为$i$的闭球。则对于任意$i\in\mathbb{N}^+$，
+    \begin{equation*}
+        E_i\subset E_{i+1},\;\;\; m(E)=\lim_{i\to\infty} m(E_i).
+    \end{equation*}
+    故存在一个$i_0$使得$m(E_{i_0})>M$，且$E_{i_0}$有界。由(1)可以找到紧集$K\subset E_{i_0}\subset E$使得$m(K)>M$。根据$M$的任意性，我们可以得到 \eqref{bound}。
+
+\end{proof}
+\section{Solution of Ex 1.2.22}
+Let $d,d^\prime\geq 1$ be natural numbers. (i) If $E\subset \mathbb{R}^d$ and $F\subset \mathbb{R}^{d^\prime}$, show that 
+\begin{equation}
+    (m^{d+d^\prime})^*(E\times F)\leq (m^d)^*(E)\times (m^{d^\prime})^*(F),
+    \label{outer_ineq}
+\end{equation}
+where $(m^d)^*$ denotes $d$-dimensional Lebesgue outer measure, etc.      
+\begin{proof}
+    (1) 若$E,F$中有一集合外测度为$\infty$且另一集合外测度不为零，则上式显然成立。
+    
+    (2) 故我们首先考虑$E,F$的Lebesgue外测度均有限的情况。令$O_E,O_F$是两个开集，且对于任意$\epsilon>0$满足如下条件
+    \begin{equation*}
+        \begin{split}
+            O_E&\supset E,\;\;\; (m^d)(O_E)=(m^d)^*(O_E)\leq (m^d)^*(E)+\epsilon;\\
+            O_F&\supset F,\;\;\; (m^{d^\prime})(O_F)=(m^{d^\prime})^*(O_F)\leq (m^{d^\prime})^*(F)+\epsilon.
+        \end{split}
+    \end{equation*}
+    根据Lemma 1.2.11，开集$O_E,O_F$可以表示为几乎不交的闭的cubes的可数并
+    \begin{equation*}
+        O_E=\bigcup_{i=1}^\infty B_i,\;\;\; O_F=\bigcup_{j=1}^\infty B^\prime_j,
+    \end{equation*}
+    其中$B_i$是$\mathbb{R}^d$中的闭cube，$B^\prime_j$是$\mathbb{R}^{d^\prime}$中的闭cube。任给$x\in E\times F\subset \mathbb{R}^{d+d^\prime}$，$x\in O_E\times O_F$。则$E\times F$是开集$O_E\times O_F$的子集，故
+    \begin{equation*}
+        (m^{d+d^\prime})^*(E\times F)\leq (m^{d+d^\prime})^*(O_E\times O_F)=(m^{d+d^\prime})^*(\bigcup_{i,j=1}^\infty B_i\times B^\prime_j).
+    \end{equation*}
+    由于$B_i,B^{\prime}_j$都是几乎不交的闭的cube，则
+    \begin{equation*}
+        \begin{split}
+            (m^{d+d^\prime})^*(\bigcup_{i,j=1}^\infty B_i\times B^\prime_j)&=\sum_{i=1}^\infty \sum_{j=1}^\infty (m^d)^*(B_i)\cdot (m^{d^\prime})^*(B^\prime_j)=(m^d)^*(O_E)\cdot (m^{d^\prime})^*(O_F)\\
+            &\leq (m^d)^*(E)\times (m^{d^\prime})^*(F)+\epsilon\cdot\bigl((m^d)^*(E)+(m^{d^\prime})(F)\bigr)+\epsilon^2.
+        \end{split}
+    \end{equation*}
+    由$\epsilon$的任意性，我们有 \eqref{outer_ineq} 成立。
+    
+    (3) 若$E,F$中有一集合外测度为$\infty$且另一集合外测度为零，不妨设$(m^d)^*(E)=\infty$且$(m^{d^\prime})^*(F)=(m^{d^\prime})(F)=0$，这时，记$\{K_n\}$为如下序列
+    \begin{equation*}
+        K_n=F\cap B_n(O),\;\;\;\forall n\in\mathbb{N}^+,
+    \end{equation*}
+    其中$B_n(O)$是以原点为中心，半径为$n$的开球。这时，我们有
+    \begin{equation*}
+        F=\bigcup_{n=1}^\infty K_n,\;\;\; K_n\subset K_{n+1},\;\;\; \forall n\geq 1.
+    \end{equation*}
+    令$O_E\supset E$是一个开集，则
+    \begin{equation}
+        \begin{split}
+            (m^{d+d^\prime})^*(E\times F)&\leq(m^{d+d^\prime})(O_E\times F)\\
+            &=(m^d)^*(O_E)\cdot (m^{d^\prime})^*(F)\\
+            &=(m^d)^*(O_E)\cdot \lim_{n\to\infty}(m^{d^\prime})^*(K_n)\\
+            &=(m^d)^*(O_E)\cdot 0=0.
+            \label{zero}
+        \end{split}
+    \end{equation}
+\end{proof}
+
+(ii) Let $E\subset \mathbb{R}^d, F\subset \mathbb{R}^{d^\prime}$ be Lebesgue measurable sets. Show that $E\times F\subset \mathbb{R}^{d+d^\prime}$ is Lebesgue measurable, with $m^{d+d^\prime}(E\times F)=m^d(E) · m^{d^\prime}(F)$. (Note that we allow $E$ or $F$ to have infinite measure, and so one may have to divide into cases or take advantage of the monotone convergence theorem for Lebesgue measure, Exercise 1.2.11.)
+\begin{proof}
+    (1) 我们从一个有限测度的特殊情况开始。假设$E,F$是两个可测集，且$m(E),m(F)<\infty$。对于任意$\epsilon>0$，根据上一小题的结论，存在开集$O_E,O_F$使得
+    \begin{equation*}
+        \begin{split}
+            O_E&\supset E,\;\;\; (m^d)(O_E)\leq (m^d)(E)+\epsilon;\\
+            O_F&\supset F,\;\;\; (m^{d^\prime})(O_F)\leq (m^{d^\prime})(F)+\epsilon.
+        \end{split}
+    \end{equation*}
+    另一方面，存在紧集$K_E,K_F$使得
+    \begin{equation*}
+        \begin{split}
+            K_E&\subset E,\;\;\; (m^d)(K_E)\geq (m^d)(E)-\epsilon;\\
+            K_F&\subset F,\;\;\; (m^{d^\prime})(K_F)\geq (m^{d^\prime})(F)-\epsilon.
+        \end{split}
+    \end{equation*}
+    显然，我们有$(K_E\times K_F)\subset (E\times F)\subset (O_E\times O_F)$，且$K_E\times K_F$是$\mathbb{R}^{d+d^\prime}$中的紧集，故它可测，同时
+    \begin{equation*}
+        (m^{d+d^\prime})(K_E\times K_F)\geq (m^d)(E)\times (m^{d^\prime})(F)-\epsilon\cdot\bigl((m^d)(E)+(m^{d^\prime})(F)\bigr)+\epsilon^2.
+    \end{equation*}
+    另一方面，$(O_E\times O_F)\backslash (E\times F)\subset (O_E\times O_F)\backslash (K_E\times K_F)$，且
+    \begin{equation*}
+        \begin{split}
+            (m^{d+d^\prime})^*\bigl((O_E\times O_F)\backslash (E\times F)\bigr)&\leq (m^{d+d^\prime})\bigl((O_E\times O_F)\backslash (K_E\times K_F)\bigr)\\
+            &=(m^{d+d^\prime})(O_E\times O_F)-(m^{d+d^\prime})(K_E\times K_F)\\
+            &\leq 2\epsilon\cdot\bigl((m^d)(E)+(m^{d^\prime})(F)\bigr).
+        \end{split}
+    \end{equation*}
+    由$\epsilon$的任意性，我们可知$E\times F$是$\mathbb{R}^{d+d^\prime}$中的可测集，且
+    \begin{equation*}
+        (m^{d+d^\prime})(E\times F)=(m^d)(E)\times (m^{d^\prime})(F).
+    \end{equation*}
+    (2) 由 \eqref{zero} 可知，若$E,F$中有一集合测度为$\infty$且另一集合测度为零，则
+    \begin{equation*}
+        (m^{d+d^\prime})(E\times F)=(m^{d+d^\prime})^*(E\times F)=(m^d)(E)\times (m^{d^\prime})(F)=0.
+    \end{equation*}
+    (3) 若$E,F$中有一集合测度为$\infty$且另一集合测度不为零，不妨设$(m^d)^*(E)=\infty$且$(m^{d^\prime})(F)\neq 0$，这时令序列$\{S_n\}$如下定义：
+    \begin{equation*}
+        S_n=E\cap B_n(O),\;\;\; n=1,2,\cdots
+    \end{equation*}
+    这时，我们有$S_n\subset S_{n+1},\forall n\geq 1$, 且$E=\bigcup_{n=1}^\infty S_n$。同时，令$K_F\subset F$是一紧集，且$(m^{d^\prime})(K_F)>0$。这时，我们有
+    \begin{equation*}
+        \begin{split}
+            (m^{d+d^\prime})(E\times K_F)=\lim_{n\to\infty}(m^{d+d^\prime})(S_n\times K_F)=\lim_{n\to\infty}(m^d)(S_n)\times (m^{d^\prime})(K_F)=\infty.
+        \end{split}
+    \end{equation*}
+    由单调性，我们可以得到
+    \begin{equation*}
+        (m^{d+d^\prime})(E\times F)=(m^d)(E)\times (m^{d^\prime})(F)=\infty.
+    \end{equation*}
+\end{proof}
+
+
+\section{Solution of Ex 1.2.23}
+(Uniqueness of Lebesgue measure). Show that Lebesgue measure $E\to m(E)$ is the only map from Lebesgue measurable sets to $[0,+\infty]$ that obeys the following axioms:
+
+(i) (Empty set) $m(\emptyset) =0$.
+
+(ii) (Countable additivity) If $E_1,E_2,\dots \subset \mathbb{R}^d$ is a countable sequence of disjoint Lebesgue measurable sets, then $m(\cup_{n=1}^\infty E_n)=\sum_{n=1}^\infty m(E_n)$.
+
+(iii) (Translation invariance) If $E$ is Lebesgue measurable and $x\in \mathbb{R}^d$, then $m(E+x)=m(E)$.
+
+(iv) (Normalisation) $m([0,1]^d)=1$.
+\begin{proof}
+    设$f:E\to f(E)$是一个从Lebesgue可测集到$[0,+\infty]$的映射，且满足上面的测度公理。由Exercise 1.2.8可知，基本集是Lebesgue可测集，且对于任意基本集$E$，$m(E)=m^{(J)}(E)$。另一方面，由Exercise 1.1.3可知，基本集上满足非负性、有限可加性和平移不变性的测度具有唯一性，且在相差一个常数系数的情况下等价。因此，我们考虑将$f$限制在基本集上。$f([0,1]^d)=1$，且$f$满足上面的三条性质，故$f$在基本集上与Lebesgue测度$m$等价。
+
+    设$E$是一个开集，则$E=\bigcup_{i=1}^\infty Q_i$，其中$Q_i$是$d$维几乎不交的闭cube。由于$Q_i$是几乎不交的闭cube，则$Q_i$是基本集，且
+    \begin{equation*}
+        f(Q_i)=m(Q_i),\;\;\; f(E)=\sum_{i=1}^\infty f(Q_i)=\sum_{i=1}^\infty m(Q_i)=m(E).
+    \end{equation*}
+    故$f$和$m$在开集上等价。
+
+    设$E$是一个Lebesgue可测集，由Lebesgue外测度的定义，我们有
+    \begin{equation*}
+        m(E)=m^*(E)=\inf_{E\subset U,\ U\ \mathrm{open}} m(U).
+    \end{equation*}
+    对任意$\epsilon>0$，令$S\supset E$是一个开集，且$m(S)\leq m(E)+\epsilon$。故
+    \begin{equation}
+        f(E)\leq f(S)=m(S)\leq m(E)+\epsilon.
+        \label{upper}
+    \end{equation}
+    由$\epsilon$的任意性，我们有$f(E)\leq m(E)$。另一方面
+    \begin{equation}
+        f(E)=f(S)-f(S\backslash E)=m(S)-f(S\backslash E)\geq m(S)-m(S\backslash E)=m(E).
+        \label{lower}
+    \end{equation}
+    结合 \eqref{upper} 和 \eqref{lower}，我们可知，$f$和勒贝格测度$m$在可测集上等价。
+\end{proof}
+
+
+
+\end{document}
