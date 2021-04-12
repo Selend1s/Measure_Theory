@@ -1,6 +1,6 @@
 \documentclass[reqno,a4paper,14pt]{amsart}
-\usepackage{amsmath}
-\usepackage{amsthm}
+% \usepackage{amsmath}
+% \usepackage{amsthm}
 \usepackage{ctex}
 \usepackage{mathtools}
 \newcommand\me{\mathrm{e}}
@@ -8,6 +8,7 @@
 \usepackage{mathtools}
 %\usepackage[greek,english]{babel}
 \usepackage{amssymb}
+\usepackage{zhlipsum}
 \newcommand\dif{\,\mathrm{d}}
 \newcommand\mE{\mathbb{E}}
 \newcommand\Pro{\mathbb{P}}
@@ -23,11 +24,11 @@
             linkcolor=blue,
             anchorcolor=black,
             citecolor=black,
-            pdfauthor={丁珍，程预敏},%
-            pdftitle={测度论练习题2},%
-            pdfsubject={概率论},
-            pdfkeywords={测度论，Lebesgue测度},
-            pdfproducer={LaTeX},%
+            pdfauthor={丁珍，程预敏},% 作者
+            pdftitle={测度论练习题3},% 标题
+            pdfsubject={概率论},% 主题
+            pdfkeywords={测度论，Lebesgue积分},% 关键字
+            pdfproducer={LaTeX},
             pdfcreator={xeLaTeX}}
 
 \usepackage{mathrsfs}
@@ -56,100 +57,123 @@
 
 \begin{document}
 \maketitle
-\section{Solution of Ex 1.2.11}
-(i) (Upward monotone convergence) Let $E_1\subset E_2\subset \dots \subset \mathbb{R}^n$ be a countable non-decreasing sequence of Lebesgue measurable sets. Show shta $m(\bigcup_{n=1}^\infty E_n)=\lim_{n\to\infty} m(E_n)$. (\textit{Hint:} Express $\bigcup_{n=1}^\infty E_n$ as the countable union of the lacunae $E_n\backslash \bigcup_{n^\prime=1}^{n-1} E_{n^\prime}$.)
+
+
+\section{Solution of Ex 1.3.2}
+(Basic properties of the complex-valued simple integral). Let $f,g: \mathbb{R}^d\to \mathbb{C}$ be absolutely integrable simple functions.
+
+(i) (*-linearity) We have 
+\begin{equation}
+    \mathrm{Simp}\int_{\mathbb{R}^d} f(x)+g(x)\dif x= \mathrm{Simp}\int_{\mathbb{R}^d} f(x)\dif x+\mathrm{Simp}\int_{\mathbb{R}^d} g(x)\dif x
+    \label{additivity}
+\end{equation}
+and 
+\begin{equation}
+    \mathrm{Simp}\int_{\mathbb{R}^d} c f(x)\dif x=c\times\mathrm{Simp} \int_{\mathbb{R}^d} f(x)\dif x
+    \label{dot_multi}
+\end{equation}
+for all $c\in \mathbb{C}$. Also we have 
+\begin{equation}
+    \mathrm{Simp} \int_{\mathbb{R}^d} \overline{f}(x)\dif x=\overline{\mathrm{Simp}\int_{\mathbb{R}^d} f(x)\dif x}.
+    \label{conjugation}
+\end{equation}
 \begin{proof}
-    记$E=\bigcup_{n=1}^\infty E_n$。对于任意$k\geq 2$，令
+    我们首先考虑绝对收敛的实数值简单函数的情形，即$f,g: \mathbb{R}^d\to \mathbb{R}$。由于$f,g$都是简单函数，则$h=f+g$也是简单函数。且
     \begin{equation*}
-        G_1=E_1,\;\;\; G_2=E_2-E_1, \cdots, G_k=E_k-E_{k-1}.
+        h_+ - h_-=(f_+ - f_-)+(g_+ - g_-).
     \end{equation*}
-    根据Lemma 1.2.13，对于任意$k\geq 1$，$G_k$ 是两两不交的可测集，且
-    \begin{equation*}
-        E_n=\bigcup_{k=1}^n G_k,\;\;\; E=\bigcup_{k=1}^\infty G_k.
-    \end{equation*}
-    因此
-    \begin{equation*}
-        m(\bigcup_{n=1}^\infty E_n)=m(E)=\sum_{k=1}^\infty m(G_k)=\lim_{N\to\infty} \sum_{k=1}^N m(G_k)=\lim_{N\to\infty}m\biggl(\bigcup_{k=1}^N G_k\biggr)=\lim_{N\to\infty}m(E_N).
-    \end{equation*}
-\end{proof}
-(ii) (Downward monotone convergence) Let $\mathbb{R}^d \supset E_1 \supset E_2\supset \dots$ be a countable non-increasing sequence of Lebesgue measurable sets. If at least one of the $m(E_n)$ is finite, show that $m(\bigcap_{n=1}^\infty E_n)=\lim_{n\to \infty} m(E_n)$.
-\begin{proof}
-    记$E=\bigcap_{n=1}^\infty E_n$。不失一般性，我们假设$m(E_1)<\infty$。令
-    \begin{equation*}
-        G_1=E_1-E_2,\;\;\; G_2=E_2-E_3, \cdots, G_k=E_k-E_{k+1}.
-    \end{equation*}
-    根据Lemma 1.2.13，对于任意$k\geq 1$，$G_k$ 是两两不交的可测集，且
-    \begin{equation*}
-        E_1=E\cup \bigcup_{k=1}^\infty G_k
-    \end{equation*}
-    是一个可测集的不交并。由此，我们有
+    由于$f,g$都是绝对收敛的简单函数，则易证上面的函数是绝对收敛的非负简单函数。且我们有
+    \begin{equation}
+        h_+ + f_- + g_- = h_- + f_+ + g_+.
+        \label{equivalence}
+    \end{equation}
+    根据非负简单函数积分的线性性，我们有
     \begin{equation*}
         \begin{split}
-            m(E_1)&=m(E)+\sum_{k=1}^\infty m(G_k)=m(E)+\lim_{N\to\infty} \sum_{k=1}^N m(G_k)\\
-            &=m(E)+\lim_{N\to\infty}\sum_{k=1}^N\bigl(m(E_k)-m(E_{K+1})\bigr)\\
-            &=m(E)+m(E_1)-\lim_{N\to\infty}m(E_{N+1}).
+            \mathrm{Simp}\int_{\mathbb{R}^d} h_+(x)\dif x + \mathrm{Simp}\int_{\mathbb{R}^d} f_-(x)\dif x +\mathrm{Simp}\int_{\mathbb{R}^d} g_-(x)\dif x &=\\
+            \mathrm{Simp}\int_{\mathbb{R}^d} h_-(x)\dif x + \mathrm{Simp}\int_{\mathbb{R}^d} f_+(x)\dif x &+ \mathrm{Simp}\int_{\mathbb{R}^d} g_+(x)\dif x.
         \end{split}
     \end{equation*}
-    由于$m(E_1)<\infty$，且对于任意$k>1$，有$E_k\subset E_1,m(E_k)<\infty$。综上，我们有
-    \begin{equation*}
-        m(E)=m(\bigcap_{n=1}^\infty E_n)=\lim_{N\to\infty}m(E_{N+1})=\lim_{N\to\infty}m(E_{N}).
-    \end{equation*}
-\end{proof}
-(iii) Give a counterexample to show that in the hypothesis that at least one of the $m(E_n)$ is finite in the downward monotone convergence theorem cannot be dropped.
-\begin{proof}
-    令$E_n=(n,\infty)\subset \mathbb{R}$。对于任意$k\geq 1$，我们有$m(E_K)=\infty$。同时，令$E=\bigcap_{n=1}^\infty E_n$，$\forall x\in \mathbb{R}$，存在$N\in\mathbb{N}$，使得
-    \begin{equation*}
-        x<N,\;\;\; x\notin E_N.
-    \end{equation*}
-    故$E=\emptyset,m(E)=0$。综上$m(E)=m(\bigcap_{n=1}^\infty E_n)\neq \lim_{n\to\infty}m(E_n)$。
-\end{proof}
-
-
-
-
-\section{Solution of Ex 1.2.12}
-Show that any map $E\to m(E)$ from Lebesgue measurable sets to elements of $[0,+\infty]$ that obeys the above empty set and countable additivity axioms will also obey the monotinicity and countable subadditivity axioms from Exercise 1.2.3, when restricted to Lebesgue measurable sets of course.
-\begin{proof}
-    (i) 单调性。 令$E,G$是两个Lebesgue可测集，且$G\subset E\subset \mathbb{R}^d$。设$f$是从Lebesgue可测集到$\overline{\mathbb{R}^+}$的满足空集和可数可加性公理的映射。不妨设$f(G)<\infty$。根据可数可加性和空集公理，我们有
-    \begin{equation*}
-        f(E)=f(G)+f(E\backslash G).
-    \end{equation*}
-    由于$E\backslash G$是Lebesgue可测集，则$f(E\backslash G)\geq 0$。于是，我们有$f(E)\geq f(G)$。若$f(G)=\infty$，显然有$f(E)=\infty\geq f(G)$。
-
-    (ii) 可数次可加性。令$E_1,E_2,\cdots \subset \mathbb{R}^d$是一个可数的Lebesgue可测集序列，且对于任意$n\in\mathbb{N}^+$有$f(E_n)<\infty$。同时记$\bigcup_{n=1}^\infty E_n=E$。此外，令Lebesgue可测集序列$\{G_k\}$由下定义：
-    \begin{equation*}
-        G_1=E_1,\;\;\; G_k=E_k\backslash\bigcup_{n^\prime=1}^{k-1} E_{n^\prime}:\;\; \forall k\geq 2.
-    \end{equation*}
-    显然，$\{G_k\}$是可数的不交的Lebesgue可测集序列，且对于任意$N\in \mathbb{N}^+$，有$\bigcup_{k=1}^N E_k=\bigcup_{k=1}^N G_k$。由$f$的可数可加性，我们有
-    \begin{equation*}
-        f(E)=f(\bigcup_{k=1}^\infty E_k)=f(\bigcup_{k=1}^\infty G_k)=\lim_{N\to\infty}\sum_{k=1}^N f(G_k).
-    \end{equation*}
-    另一方面，对于任意$N\in \mathbb{N}^+$，有$G_k\subset E_k$，根据$f$的单调性，我们有
-    \begin{equation*}
-        f(E_k)\geq f(G_k):\;\;\;\forall k\in \mathbb{N}^+.
-    \end{equation*}
-    综上，我们有
-    \begin{equation*}
-        f(E)=f(\bigcup_{k=1}^\infty E_k)=\lim_{N\to\infty}\sum_{k=1}^N f(G_k)\leq \lim_{N\to\infty}\sum_{k=1}^N f(E_k).
-    \end{equation*}
-    若$\exists n_0\in \mathbb{N}^+$使得$f(E_{n_0})=\infty$，显然有$f(E)\leq \sum_{k=1}^\infty f(E_k)$成立。
-\end{proof}
-
-\section{Solution of Ex 1.2.14}
-Let $E\subset \mathbb{R}^d$. Show that $E$ is contained in a Lebesgue measurable set of measure exactly equal to $m^*(E)$.
-\begin{proof}
-    若$m^*(E)=\infty$，令$U=\mathbb{R}^d\supset E$，$m(U)=\infty=m^*(E)$成立。
+    将上式整理后，就可以得到可加性 \eqref{additivity}。
     
-    若$m^*(E)<\infty$。由外测度定义，任给$\epsilon>0$和$i\in\mathbb{N}^+$，存在开集$U_i\supset E$，且$m(U_i)\leq m^*(E)+\frac{1}{i}$。
-    令$S=\bigcap_{i=1}^\infty U_i$是可测集。显然，对于任意$i\in\mathbb{N}^+$，$U_i\supset E$，故$S\supset E$，$m(S)=m^*(S)\geq m^*(E)$。另一方面，对于任意$\epsilon>0$，存在$i_\epsilon\in \mathbb{N}$，使得$\frac{1}{i_\epsilon}\leq \epsilon$。这时，我们有
+    当$c\geq 0\in\mathbb{R}$时，显然有
     \begin{equation*}
-        S\subset U_{i_\epsilon},\;\;\; m(S)\leq m(U_{i_\epsilon})\leq m^*(E)+\frac{1}{i_\epsilon}\leq m^*(E)+\epsilon.
+        \begin{split}
+            \mathrm{Simp}\int_{\mathbb{R}^d} c f(x)\dif x &= \mathrm{Simp}\int_{\mathbb{R}^d} c f_+(x)\dif x -\mathrm{Simp}\int_{\mathbb{R}^d} c f_-(x)\dif x\\
+            &=c\times\mathrm{Simp} \int_{\mathbb{R}^d} f_+(x)\dif x - c\times\mathrm{Simp} \int_{\mathbb{R}^d} f_-(x)\dif x\\
+            &=c\times\mathrm{Simp} \int_{\mathbb{R}^d} f(x)\dif x.
+        \end{split}
     \end{equation*}
-    由$\epsilon$的任意性，我们有$S\supset E$且$m(S)=m^*(E)$。
+    当$c=-1$时，我们有
+    \begin{equation*}
+        \begin{split}
+            \mathrm{Simp}\int_{\mathbb{R}^d} - f(x)\dif x &= \mathrm{Simp}\int_{\mathbb{R}^d}  f_-(x)\dif x -\mathrm{Simp}\int_{\mathbb{R}^d}  f_+(x)\dif x\\
+            &=-1\times\mathrm{Simp} \int_{\mathbb{R}^d} f(x)\dif x.
+        \end{split}
+    \end{equation*}
+    根据上面两式，不难证明 \eqref{dot_multi} 对所有$c\in \mathbb{R}$成立。同时，根据复数值简单函数的积分定义，不难将上面两个性质推导到复数值简单函数的情形。
+
+    当$f$是绝对收敛的复数值简单函数，且$f=\sum_{i=1}^n c_i 1_{E_i}$时，易证
+    \begin{equation}
+        \mathrm{Simp}\int_{\mathbb{R}^d}  f(x)\dif x = \sum_{i=1}^n c_i \cdot m(E_i).
+        \label{Uniqueness}
+    \end{equation}
+    这时我们有$\overline{f}=\overline{\sum_{i=1}^nc_i 1_{E_i}}=\sum_{i=1}^n \overline{c_i}1_{E_i}$，且
+    \begin{equation*}
+        \mathrm{Simp} \int_{\mathbb{R}^d} \overline{f}(x)\dif x = \sum_{i=1}^n \overline{c_i}\cdot m(E_i)=\overline{\mathrm{Simp}\int_{\mathbb{R}^d} f(x)\dif x}.
+    \end{equation*}
+\end{proof}
+(ii) (Equivalence) If $f$ and $g$ agree almost everywhere, then we have \\$\mathrm{Simp}\int_{\mathbb{R}^d} f(x)\dif x=\mathrm{Simp}\int_{\mathbb{R}^d} g(x)\dif x$.
+\begin{proof}
+    我们首先考虑实数值简单函数的情形。若$f$和$g$是几乎处处相等的绝对收敛的实数值简单函数，则$f_+$和$g_+$、$f_-$和$g_-$也几乎处处相等。这时，根据非负简单函数的相等性，我们有
+    \begin{equation*}
+        \begin{split}
+            \mathrm{Simp}\int_{\mathbb{R}^d} f_+(x)\dif x = \mathrm{Simp}\int_{\mathbb{R}^d} g_+(x)\dif x,\;\;\;\mathrm{Simp}\int_{\mathbb{R}^d} f_-(x)\dif x = \mathrm{Simp}\int_{\mathbb{R}^d} g_-(x)\dif x.
+        \end{split}
+    \end{equation*}
+    结合上式，我们有$\mathrm{Simp}\int_{\mathbb{R}^d} f(x)\dif x=\mathrm{Simp}\int_{\mathbb{R}^d} g(x)\dif x$。
+    
+    当$f$和$g$是几乎处处相等的绝对收敛的复数值简单函数时，$Re(f)$和$Re(g)$、$Im(f)$和$Im(g)$也几乎处处相等，根据实数值简单函数的相等性，可以得到$f$和$g$的积分值相等。
+\end{proof}
+(iii) (Compatibility with Lebesgue measure) For any Lebesgue measurable $E$, one has $\mathrm{Simp} \int_{\mathbb{R}^d} 1_{E}(x)\dif x=m(E)$.
+\begin{proof}
+    显然，$1_{E}(x)$是非负简单函数，根据非负简单函数的勒贝格测度的相容性，可以得到这一结论。
+\end{proof}
+(iv) (Uniqueness) Show that the complex-valued simple integral 
+\begin{equation*}
+    f \to \mathrm{Simp} \int_{\mathbb{R}^d} f(x) \dif x
+\end{equation*}
+is the only map from the space $\mathrm{Simp}^{abs}(\mathbb{R}^d)$ of absolutely integrable simple functions to $\mathbb{C}$ that obeys all of the above properties.
+\begin{proof}
+    对于绝对收敛的复数值简单函数$f$，考虑它的典范表示：$f=\sum_{i=1}^n c_i 1_{E_i}$，其中$c_i$各异且$E_i$不交。若$\sum_{j=1}^m s_j 1_{F_j}$也是$f$的一个典范表示。易证在这两个表示中，$m=n$且存在从$i$到$j$的一个双射$\sigma$使得$s_{\sigma(i)}=c_i, F_{\sigma(i)}=E_i$。也就是说，典范表示具有唯一性。根据 \eqref{Uniqueness}，我们有
+    \begin{equation*}
+        \mathrm{Simp}\int_{\mathbb{R}^d}  f(x)\dif x = \sum_{i=1}^n c_i \cdot m(E_i)
+    \end{equation*}
+    根据典范表示和Lebesgue测度的唯一性，我们可知，绝对收敛的简单函数的简单积分具有唯一性。
 \end{proof}
 
 
-\section{Solution of Ex 1.2.15}
+
+\section{Solution of Ex 1.3.4}
+Let $f: \mathbb{R}^d\to [0,+\infty]$. Show that $f$ is a \textit{bounded} unsigned measurable functions if and only if $f$ is the \textit{uniform} limit of \textit{bounded} simple functions.
+\begin{proof}
+    (i) (充分性) 考虑$\{f_n\}$是一致收敛到$f$的有界非负简单函数列。显然，$f$是非负函数。根据Lemma 1.3.9 (ii)，$f$是Lebesgue可测函数。另一方面，对于$\epsilon=1$，存在$n_1\geq 1$使得
+    \begin{equation*}
+        \sup_{x\in\mathbb{R}^d}\abs{f_{n_1}(x)-f(x)}\leq 1,\;\;\; f(x)\leq f_{n_1}(x)+1,\;\;\; \forall x\in\mathbb{R}^d.
+    \end{equation*}
+    令$M_{n_1}$是函数$f_{n_1}$的上界，则$f(x)\leq M_{n_1}+1, \forall x\in\mathbb{R}^d$。也就是说$f$是有界非负的可测函数。
+
+    (ii) (必要性) 
+\end{proof}
+
+\section{Solution of Ex 1.3.6}
+Let $f: \mathbb{R}^d\to [0,+\infty]$ be an unsigned measurable function. Show that the region $\{(x,t)\in \mathbb{R}^d\times \mathbb{R} : 0\leq t\leq f(x)\}$ is a measurable subset of $\mathbb{R}^{d+1}$. 
+\begin{proof}
+    
+\end{proof}
+
+
+\section{Solution of Ex 1.3.10}
 (Inner regularity). Let $E\subset \mathbb{R}^d$ be Lebesgue measurable. Show that 
 \begin{equation*}
     m(E)=\sup_{K\subset E,\ K\ \mathrm{compact}} m(K).
