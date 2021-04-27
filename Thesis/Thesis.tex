@@ -1,0 +1,178 @@
+\documentclass[reqno,a4paper,12pt]{amsart}
+% \usepackage{amsmath}
+% \usepackage{amsthm}
+\usepackage{ctex}
+\usepackage{mathtools}
+\newcommand\me{\mathrm{e}}
+\newcommand\mi{\mathrm{i}}
+\newcommand\distribution{\stackrel{law}{\longrightarrow}}
+\usepackage{mathtools}
+%\usepackage[greek,english]{babel}
+\usepackage{amssymb}
+\usepackage{zhlipsum}
+\newcommand\dif{\,\mathrm{d}}
+\newcommand\mE{\mathbb{E}}
+\newcommand\Pro{\mathbb{P}}
+\newcommand{\Kov}{柯尔莫戈洛夫}
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\usepackage{hyperref}
+\hypersetup{hypertex=true,
+            colorlinks=true,
+            linkcolor=cyan,
+            anchorcolor=green,
+            citecolor=green,
+            urlcolor=green,
+            pdfauthor={程预敏},% 作者
+            pdftitle={毕业论文},% 标题
+            pdfsubject={概率论, 随机过程, Malliavin分析},% 主题
+            pdfkeywords={Vasicek model, general Gaussian process, Malliavin calculus, Berry-Ess\'{e}en Bound},% 关键字
+            pdfproducer={LaTeX},
+            pdfcreator={xeLaTeX}}
+
+\usepackage{mathrsfs}
+%\usepackage{ntheorem}
+%\theoremsymbol{\mbox{$\box$}}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{example}{例}
+\newtheorem{remark}[theorem]{注}
+\newtheorem*{prove}{\textbf{解}}
+\newenvironment{solution}{\begin{proof}[\indent\bf 解]}{\end{proof}}
+\renewcommand{\proofname}{\indent\bf 证明}
+\newtheorem*{thm2}{Proof of Theorem 2.2}
+\usepackage{geometry}
+\geometry{a4paper,left=2.5cm,right=2.5cm,top=3cm,bottom=3cm}
+
+
+\title{\textbf{毕业论文概要}}
+
+    % \address{201940100486}
+\author{程预敏}
+    \address{数学与统计学院，江西师范大学，330022，南昌，中国}
+    \email{chengym@jxnu.edu.cn}
+
+\thanks{感谢淘宝和快递公司，是他们让我的电脑得以复活。感谢大肉噶233在这之间的直播生涯}
+\subjclass[2010]{Primary 60H10, 60J60, 60J65, 60G44, 60E15}
+\keywords{Vasicek model, general Gaussian process, Malliavin calculus, Berry-Ess\'{e}en Bound}
+\date{\today}
+
+\begin{document}
+
+\begin{abstract}
+    我们在这一概要中，主要考虑Vasicek model的矩估计量的Berry-Ess\'{e}en上界。摘要占用。
+\end{abstract}
+\maketitle
+
+
+\section{主要模型}
+考虑由一般高斯过程驱动的Vasicek model，它满足下面的随机微分方程(SDE)：
+\begin{equation}
+    \dif X_t=k(\mu -X_t)\dif t+\sigma \dif G_t,\;\;\; t\in[0,T],
+    \label{Vmdif}
+\end{equation}
+其中$k>0,T\geq 0,X_0=0$，$G_t$是一般的一维高斯过程。我们可以给出Vasicek model的一个解析形式：
+\begin{equation}
+    X_t=\mu(1-\me^{-kt})+\int^t_0 e^{-k(t-s)}\dif G_s.
+    \label{Vmexp}
+\end{equation}
+
+Vasicek model 在金融和经济领域有很多重要的应用，具体待补充。第一段占用。
+
+
+
+
+
+
+
+\section{主要的估计量及其相关的结果}
+我们首先考虑$k$的二阶矩估计量$\hat{k}$：
+\begin{equation}
+    \hat{k}=\biggl[\frac{\frac{1}{T}\int_0^T X^2_t\dif t - \bigl(\frac{1}{T}\int_0^T X_t\dif t\bigr)^2}{C_\beta \Gamma(2\beta -1)}\biggr]^{-\frac{1}{2\beta}}.
+    \label{k-moment}
+\end{equation}
+在上式中，我们可以得到关于$\mu$的一阶矩估计量：
+\begin{equation}
+    \hat{\mu}=\frac{1}{T}\int_0^T X_t\dif t.
+    \label{mu-moment}
+\end{equation}
+可以将 \eqref{k-moment} 类比到Chen和Zhou论文中的二阶矩估计量：
+\begin{equation*}
+    \tilde{\theta}_T=\biggl[\frac{\frac{1}{T}\int^T_0 X^2_t\dif t}{C_\beta\Gamma(2\beta -1)}\biggr]^{-\frac{1}{2\beta}}.
+\end{equation*}
+大致可以得到：
+\begin{equation*}
+    \hat{k}=\biggl[\tilde{\theta}_T^{-2\beta}-\frac{\hat{\mu}^2}{C_\beta\Gamma(2\beta -1)}\biggr]^{-\frac{1}{2\beta}}.
+\end{equation*}
+关于上面的两个矩估计量，我们有如下的定理。
+\begin{theorem}[Pei(2021), Theorem 1.2]
+    基于协方差函数的相关假定，我们有$\mu, k$的矩估计量的强相合性，也就是
+    \begin{equation*}
+        \begin{split}
+            \lim_{T\to\infty} \hat{\mu}&=\mu,\;\;\;\mathrm{a.s.}\\
+            \lim_{T\to\infty} \hat{k}&=k,\;\;\;\mathrm{a.s.}
+        \end{split}
+    \end{equation*}
+\end{theorem}
+在估计量的强相合性之外，Pei等人也得到了渐近正态性的结果。
+\begin{theorem}
+    基于同样的假定，当$\beta\in(\frac{1}{2},1)$时，可以得到$\hat{\mu}$的渐近正态性，也就是
+    \begin{equation*}
+        T^{1-\beta}(\hat{\mu}-\mu)\stackrel{law}{\longrightarrow} N(0,\frac{1}{k^2}).
+    \end{equation*}
+    当$\beta\in(\frac{1}{2},\frac{3}{4})$时，可以得到$\hat{k}$的渐近正态性，也就是
+    \begin{equation*}
+        \sqrt{T}(\hat{k}-k)\distribution N(0, k\sigma^2_\beta/4\beta^2),
+    \end{equation*}
+    其中$\sigma^2_\beta=(4\beta-1)[1+\frac{\Gamma(3-4\beta)\Gamma(4\beta-1)}{\Gamma(2\beta)\Gamma(2-2\beta)}]$。
+\end{theorem}
+
+
+
+
+
+
+
+\section{The Berry-Ess\'{e}en Bound}
+在这一节里，我们给出两个矩估计量的Berry-Ess\'{e}en Bound结果。首先，我们有
+\begin{equation*}
+    \begin{split}
+        T^{1-\beta}(\hat{\mu}-\mu)&=\frac{\mu}{k}\frac{\me^{-kT}-1}{T^\beta}+\frac{F_T}{T^\beta}\\
+        &=\frac{\mu}{k}\frac{\me^{-kT}-1}{T^\beta}+\frac{1}{k}\frac{G_T-Z_T}{T^\beta}.
+    \end{split}
+\end{equation*}
+我们用下式定义A：
+\begin{equation*}
+    \begin{split}
+        A(z):&=\Pro\biggl(kT^{1-\beta}(\hat{\mu}-\mu)\leq z\biggr)-\Pro(Z\leq z)\\
+        &=\Pro(\frac{G_T-Z_T+\mu(\me^{-kT}-1)}{T^\beta}\leq z)-\Pro(Z\leq z).
+    \end{split}
+\end{equation*}
+令$Q_T=\frac{G_T-Z_T+\mu(\me^{-kT}-1)}{T^\beta}$，我们可以得到$\abs{A(z)}$的一个四阶距形式的上确界：
+\begin{equation*}
+    \begin{split}
+        \sup_{z\in\mathbb{R}}\abs{\Pro(Q_T\leq z)-\Pro(Z\leq z)}\leq \sqrt{\frac{\mE[Q^4_T]-3\mE[Q^2_T]}{3\mE[Q_T^2]^2}}+\frac{\abs{\mE[Q^2_T]-1}}{\mE[Q^2_T]\vee 1}
+    \end{split}
+\end{equation*}
+类似地，我们给出B的定义：
+\begin{equation*}
+    \begin{split}
+        B:&=\Pro\biggl(\sqrt{\frac{4\beta^2 T}{\theta\sigma^2_\beta}}(\hat{k}-k)\leq z\biggr)-\Pro(Z-z)\\
+        &=\Pro\biggl(\hat{k}-k\leq \sqrt{\frac{\theta\sigma^2_\beta}{4\beta^2 T}}z\biggr)-\Pro(Z-z)\\
+        &=\Pro\biggl(\frac{\frac{1}{T}\int_0^T X^2_t\dif t - \bigl(\frac{1}{T}\int_0^T X_t\dif t\bigr)^2}{C_\beta \Gamma(2\beta -1)}\geq \biggl(\sqrt{\frac{\theta\sigma^2_\beta}{4\beta^2 T}}z+k\biggr)^{-2\beta}\biggr)-\Pro(Z-z)\\
+        &=\Pro\biggl(\frac{1}{T}\bigl(\int_0^T X^2_t\dif t -(\int_0^T X_t\dif t)^2\bigr)-a\geq C_\beta \Gamma(2\beta -1)\biggl[\biggl(\sqrt{\frac{\theta\sigma^2_\beta}{4\beta^2 T}}z+k\biggr)^{-2\beta}-\theta^{-2\beta}\biggr]\biggr)\\-\Pro(Z-z)\\
+        &=\Pro\biggl(\frac{1}{T}\bigl(\int_0^T X^2_t\dif t -(\int_0^T X_t\dif t)^2\bigr)-a\geq a\biggl[\biggl(1+\frac{z\sigma_\beta}{2\beta\sqrt{\theta T}}\biggr)^{-2\beta}-1\biggr]\biggr)-\Pro(Z-z)
+    \end{split}
+\end{equation*}
+
+
+
+
+
+\end{document}
