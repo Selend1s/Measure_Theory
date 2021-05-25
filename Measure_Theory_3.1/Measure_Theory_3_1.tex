@@ -1,0 +1,423 @@
+\documentclass[reqno,a4paper,10pt]{amsart}
+% \usepackage{amsmath}
+% \usepackage{amsthm}
+\usepackage{ctex}
+\usepackage{mathtools}
+\newcommand\me{\mathrm{e}}
+\newcommand\mi{\mathrm{i}}
+\usepackage{mathtools}
+%\usepackage[greek,english]{babel}
+\usepackage{amssymb}
+\usepackage{zhlipsum}
+\newcommand\dif{\,\mathrm{d}}
+\newcommand\mE{\mathbb{E}}
+\newcommand\Pro{\mathbb{P}}
+\newcommand\Rnum{\mathbb{R}}
+\newcommand{\Kov}{柯尔莫戈洛夫}
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\usepackage{hyperref}
+\hypersetup{hypertex=true,
+            colorlinks=true,
+            linkcolor=cyan,
+            anchorcolor=black,
+            citecolor=black,
+            pdfauthor={丁珍，程预敏},% 作者
+            pdftitle={测度论练习题3},% 标题
+            pdfsubject={概率论},% 主题
+            pdfkeywords={测度论，Lebesgue测度，Lebesgue积分},% 关键字
+            pdfproducer={LaTeX},
+            pdfcreator={xeLaTeX}}
+
+\usepackage{mathrsfs}
+%\usepackage{ntheorem}
+%\theoremsymbol{\mbox{$\box$}}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{example}{例}
+\newtheorem{remark}[theorem]{注}
+\newtheorem*{prove}{\textbf{解}}
+\newenvironment{solution}{\begin{proof}[\indent\bf 解]}{\end{proof}}
+\renewcommand{\proofname}{\indent\bf 证明}
+\newtheorem*{thm2}{Proof of Theorem 2.2}
+\usepackage{geometry}
+\geometry{a4paper,left=2cm,right=2cm,top=2.5cm,bottom=2.5cm}
+
+
+\title{\textbf{测度论导论\S1.3习题}}
+\author{丁\;\;\; 珍}
+    % \address{201940100486}
+\author{程预敏}
+    % \address{201940100447}
+
+\begin{document}
+\maketitle
+
+
+\section{Solution of Ex 1.3.2}
+(Basic properties of the complex-valued simple integral). Let $f,g: \mathbb{R}^d\to \mathbb{C}$ be absolutely integrable simple functions.
+
+(i) (*-linearity) We have 
+\begin{equation}
+    \mathrm{Simp}\int_{\mathbb{R}^d} f(x)+g(x)\dif x= \mathrm{Simp}\int_{\mathbb{R}^d} f(x)\dif x+\mathrm{Simp}\int_{\mathbb{R}^d} g(x)\dif x
+    \label{additivity}
+\end{equation}
+and 
+\begin{equation}
+    \mathrm{Simp}\int_{\mathbb{R}^d} c f(x)\dif x=c\times\mathrm{Simp} \int_{\mathbb{R}^d} f(x)\dif x
+    \label{dot_multi}
+\end{equation}
+for all $c\in \mathbb{C}$. Also we have 
+\begin{equation}
+    \mathrm{Simp} \int_{\mathbb{R}^d} \overline{f}(x)\dif x=\overline{\mathrm{Simp}\int_{\mathbb{R}^d} f(x)\dif x}.
+    \label{conjugation}
+\end{equation}
+\begin{proof}
+    我们首先考虑绝对收敛的实数值简单函数的情形，即$f,g: \mathbb{R}^d\to \mathbb{R}$。由于$f,g$都是简单函数，则$h=f+g$也是简单函数。且
+    \begin{equation*}
+        h_+ - h_-=(f_+ - f_-)+(g_+ - g_-).
+    \end{equation*}
+    由于$f,g$都是绝对收敛的简单函数，则易证上面的函数是绝对收敛的非负简单函数。且我们有
+    \begin{equation}
+        h_+ + f_- + g_- = h_- + f_+ + g_+.
+        \label{equivalence}
+    \end{equation}
+    根据非负简单函数积分的线性性，我们有
+    \begin{equation*}
+        \begin{split}
+            \mathrm{Simp}\int_{\mathbb{R}^d} h_+(x)\dif x + \mathrm{Simp}\int_{\mathbb{R}^d} f_-(x)\dif x +\mathrm{Simp}\int_{\mathbb{R}^d} g_-(x)\dif x &=\\
+            \mathrm{Simp}\int_{\mathbb{R}^d} h_-(x)\dif x + \mathrm{Simp}\int_{\mathbb{R}^d} f_+(x)\dif x &+ \mathrm{Simp}\int_{\mathbb{R}^d} g_+(x)\dif x.
+        \end{split}
+    \end{equation*}
+    将上式整理后，就可以得到可加性 \eqref{additivity}。
+    
+    当$c\geq 0\in\mathbb{R}$时，显然有
+    \begin{equation*}
+        \begin{split}
+            \mathrm{Simp}\int_{\mathbb{R}^d} c f(x)\dif x &= \mathrm{Simp}\int_{\mathbb{R}^d} c f_+(x)\dif x -\mathrm{Simp}\int_{\mathbb{R}^d} c f_-(x)\dif x\\
+            &=c\times\mathrm{Simp} \int_{\mathbb{R}^d} f_+(x)\dif x - c\times\mathrm{Simp} \int_{\mathbb{R}^d} f_-(x)\dif x\\
+            &=c\times\mathrm{Simp} \int_{\mathbb{R}^d} f(x)\dif x.
+        \end{split}
+    \end{equation*}
+    当$c=-1$时，我们有
+    \begin{equation*}
+        \begin{split}
+            \mathrm{Simp}\int_{\mathbb{R}^d} - f(x)\dif x &= \mathrm{Simp}\int_{\mathbb{R}^d}  f_-(x)\dif x -\mathrm{Simp}\int_{\mathbb{R}^d}  f_+(x)\dif x\\
+            &=-1\times\mathrm{Simp} \int_{\mathbb{R}^d} f(x)\dif x.
+        \end{split}
+    \end{equation*}
+    根据上面两式，不难证明 \eqref{dot_multi} 对所有$c\in \mathbb{R}$成立。同时，根据复数值简单函数的积分定义，不难将上面两个性质推导到复数值简单函数的情形。
+
+    当$f$是绝对收敛的复数值简单函数，且$f=\sum_{i=1}^n c_i 1_{E_i}$时，易证
+    \begin{equation}
+        \mathrm{Simp}\int_{\mathbb{R}^d}  f(x)\dif x = \sum_{i=1}^n c_i \cdot m(E_i).
+        \label{Uniqueness}
+    \end{equation}
+    这时我们有$\overline{f}=\overline{\sum_{i=1}^nc_i 1_{E_i}}=\sum_{i=1}^n \overline{c_i}1_{E_i}$，且
+    \begin{equation*}
+        \mathrm{Simp} \int_{\mathbb{R}^d} \overline{f}(x)\dif x = \sum_{i=1}^n \overline{c_i}\cdot m(E_i)=\overline{\mathrm{Simp}\int_{\mathbb{R}^d} f(x)\dif x}.
+    \end{equation*}
+\end{proof}
+(ii) (Equivalence) If $f$ and $g$ agree almost everywhere, then we have \\$\mathrm{Simp}\int_{\mathbb{R}^d} f(x)\dif x=\mathrm{Simp}\int_{\mathbb{R}^d} g(x)\dif x$.
+\begin{proof}
+    我们首先考虑实数值简单函数的情形。若$f$和$g$是几乎处处相等的绝对收敛的实数值简单函数，则$f_+$和$g_+$、$f_-$和$g_-$也几乎处处相等。这时，根据非负简单函数的相等性，我们有
+    \begin{equation*}
+        \begin{split}
+            \mathrm{Simp}\int_{\mathbb{R}^d} f_+(x)\dif x = \mathrm{Simp}\int_{\mathbb{R}^d} g_+(x)\dif x,\;\;\;\mathrm{Simp}\int_{\mathbb{R}^d} f_-(x)\dif x = \mathrm{Simp}\int_{\mathbb{R}^d} g_-(x)\dif x.
+        \end{split}
+    \end{equation*}
+    结合上式，我们有$\mathrm{Simp}\int_{\mathbb{R}^d} f(x)\dif x=\mathrm{Simp}\int_{\mathbb{R}^d} g(x)\dif x$。
+    
+    当$f$和$g$是几乎处处相等的绝对收敛的复数值简单函数时，$Re(f)$和$Re(g)$、$Im(f)$和$Im(g)$也几乎处处相等，根据实数值简单函数的相等性，可以得到$f$和$g$的积分值相等。
+\end{proof}
+(iii) (Compatibility with Lebesgue measure) For any Lebesgue measurable $E$, one has $\mathrm{Simp} \int_{\mathbb{R}^d} 1_{E}(x)\dif x=m(E)$.
+\begin{proof}
+    显然，$1_{E}(x)$是非负简单函数，根据非负简单函数的勒贝格测度的相容性，可以得到这一结论。
+\end{proof}
+(iv) (Uniqueness) Show that the complex-valued simple integral 
+\begin{equation*}
+    f \to \mathrm{Simp} \int_{\mathbb{R}^d} f(x) \dif x
+\end{equation*}
+is the only map from the space $\mathrm{Simp}^{abs}(\mathbb{R}^d)$ of absolutely integrable simple functions to $\mathbb{C}$ that obeys all of the above properties.
+\begin{proof}
+    对于绝对收敛的复数值简单函数$f$，考虑它的典范表示：$f=\sum_{i=1}^n c_i 1_{E_i}$，其中$c_i$各异且$E_i$不交。若$\sum_{j=1}^m s_j 1_{F_j}$也是$f$的一个典范表示。易证在这两个表示中，$m=n$且存在从$i$到$j$的一个双射$\sigma$使得$s_{\sigma(i)}=c_i, F_{\sigma(i)}=E_i$。也就是说，典范表示具有唯一性。根据 \eqref{Uniqueness}，我们有
+    \begin{equation*}
+        \mathrm{Simp}\int_{\mathbb{R}^d}  f(x)\dif x = \sum_{i=1}^n c_i \cdot m(E_i)
+    \end{equation*}
+    根据典范表示和Lebesgue测度的唯一性，我们可知，绝对收敛的简单函数的简单积分具有唯一性。
+\end{proof}
+
+
+
+\section{Solution of Ex 1.3.4}\label{1.3.4}
+Let $f: \mathbb{R}^d\to [0,+\infty]$. Show that $f$ is a \textit{bounded} unsigned measurable functions if and only if $f$ is the \textit{uniform} limit of \textit{bounded} simple functions.
+\begin{proof}
+    (i) (充分性) 考虑$\{f_n\}$是一致收敛到$f$的有界非负简单函数列。显然，$f$是非负函数。根据Lemma 1.3.9 (ii)，$f$是Lebesgue可测函数。另一方面，对于$\epsilon=1$，存在$n_1\geq 1$使得
+    \begin{equation*}
+        \sup_{x\in\mathbb{R}^d}\abs{f_{n_1}(x)-f(x)}\leq 1,\;\;\; f(x)\leq f_{n_1}(x)+1,\;\;\; \forall x\in\mathbb{R}^d.
+    \end{equation*}
+    令$M_{n_1}$是函数$f_{n_1}$的上界，则$f(x)\leq M_{n_1}+1, \forall x\in\mathbb{R}^d$。也就是说$f$是有界非负的可测函数。
+
+    (ii) (必要性) 考虑$f$是有界的非负可测函数，$M\in\mathbb{N}$是它的一个上界。令$\{f_n\}$是如下定义的函数序列：
+    \begin{equation*}
+        f_n(x)=\sum_{m=0}^{2^n\times M} \frac{m}{2^n}\times 1_{\{\frac{m}{2^n}\leq f(x)<\frac{m+1}{2^n}\}},\;\;\; n\in\mathbb{N}^+.
+    \end{equation*}
+    显然，由于$f$是可测函数，则$f^{-1}([\frac{m}{2^n},\frac{m+1}{2^n}))$是$\Rnum^d$中的可测集，故$f_n$是有界简单函数，且下列不等式成立：
+    \begin{equation*}
+        \sup_{x\in\Rnum^d}\abs{f_n(x)-f(x)}\leq \frac{1}{2^n}.
+    \end{equation*}
+    故，$\{f_n\}$是一致收敛到$f$的有界非负简单函数序列。
+\end{proof}
+
+\section{Solution of Ex 1.3.6}\label{1.3.6}
+Let $f: \mathbb{R}^d\to [0,+\infty]$ be an unsigned measurable function. Show that the region $\mathcal{D}=\{(x,t)\in \mathbb{R}^d\times \mathbb{R} : 0\leq t\leq f(x)\}$ is a measurable subset of $\mathbb{R}^{d+1}$. 
+\begin{proof}
+    我们首先考虑简单函数的情况。任给可测集$E$上的示性函数$1_{E}(x)$，显然$\mathcal{D}_{E}=\{(x,t)\in \mathbb{R}^d\times \mathbb{R} : 0\leq t\leq 1_E(x)\}$是由$E\times [0,1]$所生成的可测集。由此，任给简单函数$g(x)$，$\mathcal{D}_{g}=\{(x,t)\in \mathbb{R}^d\times \mathbb{R} : 0\leq t\leq g(x)\}$是可测集。
+    
+    对于任意非负可测函数$f$，我们记$f^n(x)=\min (f(x),n)$。令$\{f_n\}$是如下定义的函数序列：
+    \begin{equation*}
+        f_n(x)=\sum_{m=0}^{2^n\times n} \frac{m}{2^n}\times 1_{\{\frac{m}{2^n}\leq f^n(x)<\frac{m+1}{2^n}\}},\;\;\; n\in\mathbb{N}^+.
+    \end{equation*}
+    由Ex 1.3.4的解 \ref{1.3.4}，$\{f_n\}$是递增且有界的非负简单函数序列，同时$f$是$f_n$的上确界。记$\mathcal{D}_n=\{(x,t)\in \mathbb{R}^d\times \mathbb{R} : 0\leq t\leq f_n(x)\}$，显然$\mathcal{D}_n$是$\Rnum^{d+1}$上的递增可测集序列：
+    \begin{equation*}
+        \mathcal{D}_n\subset \mathcal{D}_{n+1},\;\;\; \forall n\in\mathbb{N}^+.
+    \end{equation*}
+    根据单调收敛定理，$\lim_{n\to\infty}\mathcal{D}_{n}$是$\Rnum^{d+1}$上的可测集，记为$\mathcal{D}_{\infty}$。由于$f$是序列$\{f_n\}$的上界，故
+    \begin{equation*}
+        \mathcal{D}_{\infty}\subset \mathcal{D}.
+    \end{equation*}
+    另一方面，由于$f$是序列$\{f_n\}$的上确界，故任给$(x,t)\in\mathcal{D}$（其中$t<f(x)$），存在$N\in\mathbb{N}$使得任给$n\geq N$，有$(x,t)\in \mathcal{D}_n\subset\mathcal{D}_{\infty}$。故
+    \begin{equation*}
+        (\mathcal{D}\setminus\{(x,f(x)):x\in\Rnum^d\})\subset \mathcal{D}_\infty.
+    \end{equation*}
+    又$m(\{(x,f(x)):x\in\Rnum^d\})=0$。故$m^*(\mathcal{D}\Delta \mathcal{D}_\infty)=0$，$\mathcal{D}$是可测集。
+\end{proof}
+
+
+\section{Solution of Ex 1.3.10}
+(Basic properties of the lower Lebesgue integral). Let $f,g:\Rnum^d\to [0,+\infty]$ be unsigned functions (not necessarily measurable)
+
+(i) (Compatibility with the simple integral) If $f$ is simple, then we have $\underline{\int_{\Rnum^d}} f(x)\dif x =  \overline{\int_{\Rnum^d}} f(x)\dif x= \mathrm{Simp}\int_{\Rnum^d} f(x)\dif x$.
+\begin{proof}
+    根据下积分的定义，令$h=f$，$h$显然是满足$h(x)\leq f(x)$条件的简单函数。故
+    \begin{equation*}
+        \underline{\int_{\Rnum^d}} f(x)\dif x\geq \mathrm{Simp}\int_{\Rnum^d} h(x)\dif x.
+    \end{equation*}
+    另一方面，任给简单函数$g(x)\leq f(x)$，显然有$g(x)\leq h(x)$成立，故
+    \begin{equation*}
+        \underline{\int_{\Rnum^d}} f(x)\dif x\leq \mathrm{Simp}\int_{\Rnum^d} h(x)\dif x.
+    \end{equation*}
+    又由于$\mathrm{Simp}\int_{\Rnum^d} h(x)\dif x=\mathrm{Simp}\int_{\Rnum^d} f(x)\dif x$。则我们可以得到
+    \begin{equation*}
+        \underline{\int_{\Rnum^d}} f(x)\dif x=\mathrm{Simp}\int_{\Rnum^d} f(x)\dif x.
+    \end{equation*}
+    同理，可以证明上积分的情况。
+\end{proof}
+(ii) (Monotonicity) If $f\leq g$ pointwise almost everywhere, then we have $\underline{\int_{\Rnum^d}}f(x)\dif x\leq \underline{\int_{\Rnum^d}}g(x)\dif x$ and $\overline{\int_{\Rnum^d}}f(x)\dif x\leq \overline{\int_{\Rnum^d}}g(x)\dif x$.
+\begin{proof}
+    任给简单函数$h\leq f$，显然有$h\leq g$，故
+    \begin{equation*}
+        \underline{\int_{\Rnum^d}}f(x)\dif x\leq \underline{\int_{\Rnum^d}}g(x)\dif x.
+    \end{equation*}
+    另一方面，任给简单函数$s\geq g$，显然有$s\geq f$，故
+    \begin{equation*}
+        \overline{\int_{\Rnum^d}}f(x)\dif x\leq \overline{\int_{\Rnum^d}}g(x)\dif x.
+    \end{equation*}
+\end{proof}
+(iii) (Homogeneity) If $c\in [0,+\infty)$, then $\underline{\int_{\Rnum^d}}cf(x)\dif x=c\underline{\int_{\Rnum^d}}f(x)\dif x$.
+\begin{proof}
+    当$c=0$时，上式显然成立，我们接下来考虑$c\neq 0$的情形。任给简单函数$h\leq f$，显然有$c\times h(x)\leq c\times f(x)$成立，且$c\times h(x)$也是简单函数。故由(i)和(ii)，我们有
+    \begin{equation*}
+        \underline{\int_{\Rnum^d}}cf(x)\dif x\geq \mathrm{Simp}\int_{\Rnum^d} ch(x)\dif x=c\times\mathrm{Simp}\int_{\Rnum^d} h(x)\dif x,\;\;\; \forall h\leq f,h \mathrm{\ is\ Simple}.
+    \end{equation*}
+    也就是
+    \begin{equation}
+        \underline{\int_{\Rnum^d}}cf(x)\dif x\geq c\underline{\int_{\Rnum^d}}f(x)\dif x.
+        \label{4.1}
+    \end{equation}
+    另一方面，任给简单函数$h\leq cf$，显然有简单函数$\frac{1}{c} h\leq f$。故，我们有
+    \begin{equation*}
+        \underline{\int_{\Rnum^d}}f(x)\dif x\geq \mathrm{Simp}\int_{\Rnum^d} \frac{1}{c}h(x)\dif x=\frac{1}{c}\times\mathrm{Simp}\int_{\Rnum^d} h(x)\dif x,\;\;\; \forall h\leq f,h \mathrm{\ is\ Simple}.
+    \end{equation*}
+    也就是
+    \begin{equation}
+        c\underline{\int_{\Rnum^d}}f(x)\dif x\geq \underline{\int_{\Rnum^d}}cf(x)\dif x.
+        \label{4.2}
+    \end{equation}
+    结合 \eqref{4.1} 和 \eqref{4.2}，我们就得到了题设的结果。
+\end{proof}
+(iv) (Equivalence) If $f,g$ agree almost everywhere, then $\underline{\int_{\Rnum^d}}f(x)\dif x=\underline{\int_{\Rnum^d}}g(x)\dif x$ and $\overline{\int_{\Rnum^d}}f(x)\dif x=\overline{\int_{\Rnum^d}}g(x)\dif x$.
+\begin{proof}
+    假设$f,g$在零测集$E$之外处处相等。函数$m,M$由下式定义：
+    \begin{equation*}
+        \begin{split}
+            m(x)=M(x)=f(x),\;\;\;\forall x\in \Rnum^d \setminus E,\\
+            m(x)=0,\;\;\;M(x)=+\infty,\;\;\;\forall x\in E.
+        \end{split}
+    \end{equation*}
+    显然，我们有$m\leq f,g\leq M$。任给简单函数$h\leq M$，考虑下列简单函数$h^\prime$：
+    \begin{equation*}
+        \begin{split}
+            h^\prime(x)&=h(x),\;\;\;\forall x\in\Rnum^d \setminus E,\\
+            h^\prime(x)&=0,\;\;\; \forall x\in E.
+        \end{split}
+    \end{equation*}
+    显然，我们有$h^\prime\leq m$且$\mathrm{Simp}\int_{\Rnum^d} h^\prime(x)\dif x=\mathrm{Simp}\int_{\Rnum^d} h(x)\dif x$。由此，我们有
+    \begin{equation*}
+        \underline{\int_{\Rnum^d}}m(x)\dif x\geq \underline{\int_{\Rnum^d}}M(x)\dif x.
+    \end{equation*}
+    由上式和(ii)，我们可以得到$\underline{\int_{\Rnum^d}}f(x)\dif x=\underline{\int_{\Rnum^d}}g(x)\dif x$。同理，$\overline{\int_{\Rnum^d}}f(x)\dif x=\overline{\int_{\Rnum^d}}g(x)\dif x$也成立。
+\end{proof}
+(v) (Superadditivity) $\underline{\int_{\Rnum^d}}f(x)+g(x)\dif x\geq \underline{\int_{\Rnum^d}}f(x)\dif x+\underline{\int_{\Rnum^d}}g(x)\dif x$.
+
+(vi) (Subadditivity of upper integral) $\overline{\int_{\Rnum^d}}f(x)+g(x)\dif x\leq \overline{\int_{\Rnum^d}}f(x)\dif x+\overline{\int_{\Rnum^d}}f(x)\dif x$.
+\begin{proof}
+    任给两个简单函数$h_1,h_2$，使得$h_1\leq f,h_2\leq g$。显然，$h_1+h_2\leq f+g$，故我们有\\
+    $\underline{\int_{\Rnum^d}}f(x)+g(x)\dif x\geq \underline{\int_{\Rnum^d}}f(x)\dif x+\underline{\int_{\Rnum^d}}g(x)\dif x$成立。
+    
+    类似地，任给两个简单函数$h_1,h_2$，使得$h_1\geq f,h_2\geq g$。显然，我们有$h_1+h_2\geq f+g$。因此\\
+    $\overline{\int_{\Rnum^d}}f(x)+g(x)\dif x\leq \overline{\int_{\Rnum^d}}f(x)\dif x+\overline{\int_{\Rnum^d}}f(x)\dif x$。
+\end{proof}
+(vii) (Divisibility) For any measurable set $E$, one has $\underline{\int_{\Rnum^d}}f(x)\dif x =\underline{\int_{\Rnum^d}}f(x)1_{E}(x)\dif x+\underline{\int_{\Rnum^d}}f(x)1_{\Rnum^d\setminus E}(x)\dif x$.
+\begin{proof}
+    显然，$f(x)=f(x)1_{E}(x)+f(x)1_{\Rnum^d\setminus E}(x)$，故由(v)，我们有
+    \begin{equation}
+        \underline{\int_{\Rnum^d}}f(x)\dif x \geq \underline{\int_{\Rnum^d}}f(x)1_{E}(x)\dif x+\underline{\int_{\Rnum^d}}f(x)1_{\Rnum^d\setminus E}(x)\dif x.
+        \label{4.3}
+    \end{equation}
+    另一方面，任给简单函数$h\leq f$，有$h(x)=h(x)1_{E}(x)+h(x)1_{\Rnum^d\setminus E}(x)$成立，且两者都是简单函数。此外，显然有下式成立：
+    \begin{equation*}
+        \mathrm{Simp}\int_{\Rnum^d} h(x)\dif x=\mathrm{Simp}\int_{\Rnum^d} h(x)1_{E}(x)\dif x+\mathrm{Simp}\int_{\Rnum^d} h(x)1_{\Rnum^d\setminus E}(x)\dif x.
+    \end{equation*}
+    同时，我们有
+    \begin{equation*}
+        h(x)1_{E}(x)\leq f(x)1_{E}(x),\;\;\; h(x)1_{\Rnum^d\setminus E}(x)\leq f(x)1_{\Rnum^d\setminus E}(x),\;\;\;\forall x\in\Rnum^d.
+    \end{equation*}
+    由此，可以得到
+    \begin{equation}
+        \underline{\int_{\Rnum^d}}f(x)\dif x \leq \underline{\int_{\Rnum^d}}f(x)1_{E}(x)\dif x+\underline{\int_{\Rnum^d}}f(x)1_{\Rnum^d\setminus E}(x)\dif x.
+        \label{4.4}
+    \end{equation}
+    结合 \eqref{4.3} 和 \eqref{4.4}，我们可以得到题设的结果。
+\end{proof}
+(viii) (Horizontal truncation) As $n\to\infty$, $\underline{\int_{\Rnum^d}}\min(f(x),n)\dif x$ converges to $\underline{\int_{\Rnum^d}}f(x)\dif x$.
+\begin{proof}
+    我们首先考虑$\underline{\int_{\Rnum^d}}f(x)\dif x=A< +\infty$的情形。给定$\epsilon>0$，存在非负有界简单函数$g$使得$g\leq f $且
+    \begin{equation*}
+        \underline{\int_{\Rnum^d}}f(x)\dif x-\epsilon\leq \mathrm{Simp}\int_{\Rnum^d}g(x)\dif x.
+    \end{equation*}
+    由于$g$有界，则存在$N\in\mathbb{N}$使得
+    \begin{equation*}
+        \underline{\int_{\Rnum^d}}\min(g(x),n)\dif x=\mathrm{Simp}\int_{\Rnum^d}g(x)\dif x,\;\;\;\forall n\geq N.
+    \end{equation*}
+    由于单调性，我们有
+    \begin{equation*}
+        \begin{split}
+            \underline{\int_{\Rnum^d}}\min(f(x),n)\dif x&\leq \underline{\int_{\Rnum^d}}\min(f(x),n+1)\dif x\leq \underline{\int_{\Rnum^d}}f(x)\dif x,\;\;\;\forall n\in\mathbb{N},\\
+            \underline{\int_{\Rnum^d}}\min(f(x),n)\dif x&\geq \underline{\int_{\Rnum^d}}\min(g(x),n)\dif x,\;\;\;\forall n\geq N.
+        \end{split}
+    \end{equation*}
+    由$\epsilon$的任意性，我们就得到了题设的结果。
+
+    当$\underline{\int_{\Rnum^d}}f(x)\dif x=+\infty$时，任给$M>0$，存在非负有界简单函数$g$使得$g\leq f$且
+    \begin{equation*}
+        \mathrm{Simp}\int_{\Rnum^d}g(x)\dif x\geq M.
+    \end{equation*}
+    由于$g$有界，则存在$N\in\mathbb{N}$使得
+    \begin{equation*}
+        \underline{\int_{\Rnum^d}}\min(g(x),n)\dif x=\mathrm{Simp}\int_{\Rnum^d}g(x)\dif x,\;\;\;\forall n\geq N.
+    \end{equation*}
+    由于单调性，我们有
+    \begin{equation*}
+        \begin{split}
+            \underline{\int_{\Rnum^d}}\min(f(x),n)\dif x&\leq \underline{\int_{\Rnum^d}}\min(f(x),n+1)\dif x\leq \underline{\int_{\Rnum^d}}f(x)\dif x,\;\;\;\forall n\in\mathbb{N},\\
+            \underline{\int_{\Rnum^d}}\min(f(x),n)\dif x&\geq \underline{\int_{\Rnum^d}}\min(g(x),n)\dif x,\;\;\;\forall n\geq N.
+        \end{split}
+    \end{equation*}
+    由$M$的任意性，我们就得到了题设的结果。
+\end{proof}
+(ix) (Vertical truncation) As $n\to \infty$, $\underline{\int_{\Rnum^d}}f(x)1_{\abs{x}\leq n}\dif x$ converges to $\underline{\int_{\Rnum^d}}f(x)\dif x$. \textit{Hint:} From Exercise 1.2.11 one has $m(E\cap\{x:\abs{x}\leq n\})\to m(E)$ for any measurable set $E$.
+\begin{proof}
+    我们首先考虑$\underline{\int_{\Rnum^d}}f(x)\dif x=A< +\infty$的情形。给定$\epsilon>0$，存在非负且支撑有限的简单函数$g$使得$g\leq f $且
+    \begin{equation*}
+        \underline{\int_{\Rnum^d}}f(x)\dif x-\epsilon\leq \mathrm{Simp}\int_{\Rnum^d}g(x)\dif x.
+    \end{equation*}
+    由于$g$支撑有限，则存在$N\in\mathbb{N}$使得
+    \begin{equation*}
+        \underline{\int_{\Rnum^d}}g(x)1_{\abs{x}\leq n}\dif x=\mathrm{Simp}\int_{\Rnum^d}g(x)\dif x,\;\;\;\forall n\geq N.
+    \end{equation*}
+    由于单调性，我们有
+    \begin{equation*}
+        \begin{split}
+            \underline{\int_{\Rnum^d}}f(x)1_{\abs{x}\leq n}\dif x&\leq \underline{\int_{\Rnum^d}}f(x)1_{\abs{x}\leq n+1}\dif x\leq \underline{\int_{\Rnum^d}}f(x)\dif x,\;\;\;\forall n\in\mathbb{N},\\
+            \underline{\int_{\Rnum^d}}f(x)1_{\abs{x}\leq n}\dif x&\geq \underline{\int_{\Rnum^d}}g(x)1_{\abs{x}\leq n}\dif x,\;\;\;\forall n\geq N.
+        \end{split}
+    \end{equation*}
+    由$\epsilon$的任意性，我们就得到了题设的结果。类似地，可以证明$\underline{\int_{\Rnum^d}}f(x)\dif x=+\infty$的情况。
+\end{proof}
+(x) (Reflection) If $f+g$ is a simple function that is bounded with finite measure support(i.e. it is absolutely integrable), then we have $\mathrm{Simp}\int_{\Rnum^d} f(x)+g(x)\dif x=\underline{\int_{\Rnum^d}}f(x)\dif x+\overline{\int_{\Rnum^d}}g(x)\dif x$.
+\begin{proof}
+    
+\end{proof}
+Do the horizontal and vertical truncation properties hold if the lower Lebesgue integral is replaced with the upper Lebesgue integral?
+\begin{proof}
+    考虑下列函数$f$:
+    \begin{equation*}
+        \begin{split}
+            f(x)&=+\infty,\;\;\;\forall x\in[0,1],\\
+            f(x)&=0,\;\;\;\forall x\notin[0,1].
+        \end{split}
+    \end{equation*}
+    它的任意水平截断都是0函数，故任给$n$,有
+    \begin{equation*}
+        \overline{\int_{\Rnum^d}}\min(f(x),n)\dif x=\underline{\int_{\Rnum^d}}\min(f(x),n)\dif x=0,\;\;\;\forall n\in\mathbb{N}.
+    \end{equation*}
+    另一方面，显然有$\overline{\int_{\Rnum^d}}f(x)\dif x\neq 0$。故水平截断对于上积分不成立。
+    
+    考虑下列函数$f$:
+    \begin{equation*}
+        \begin{split}
+            f(x)&=+\infty,\;\;\;\forall x\in\mathbb{N},\\
+            f(x)&=0,\;\;\;\forall x\notin\mathbb{N}.
+        \end{split}
+    \end{equation*}
+    类似地，可以证明垂直截断性质对其的上积分不成立。
+\end{proof}
+\section{Solution of Ex 1.3.13}
+(Area interpretation of integral). If $f:\Rnum^d\to[0,+\infty]$ is a measurable, show that $\int_{\Rnum^d} f(x)\dif x$ is equal to the $d+1$-dimensional Lebesgue measure of the region $\mathcal{D}=\{(x,t)\in\Rnum^d\times \Rnum:0\leq t\leq f(x)\}$. (This can be used as an alternate, and more geometrically intuitive, definition of the unsigned Lebesgue integral; it is a more convenient formulation for establishing the basic convergence theorems, but not quite as convenient for establishing basic properties such as additivity.) (\textit{Hint:} Use Exercies 1.2.22.)
+\begin{proof}
+    
+\end{proof}
+
+
+
+
+\section{Solution of Ex 1.3.16}
+(Linear change of variables). Let $f:\Rnum^d\to[0,+\infty]$ be measurable, and let $T:\Rnum^d\to\Rnum^d$ be a invertible linear transformation. Show that $\int_{\Rnum^d} f(T^{-1}(x))\dif x = \abs{\mathrm{det}T}\int_{\Rnum^d} f(x)\dif x$, or equivalenctly, that $\int_{\Rnum^d} f(Tx)\dif x=\frac{1}{\mathrm{det}T}\int_{\Rnum^d} f(x)\dif x$.
+\begin{proof}
+    
+\end{proof}
+
+\section{Solution of Ex 1.3.17}
+(Compatibility with the Riemann integral). Let $f:[a,b]\to [0,+\infty]$ be  Riemann integrable. If we extend $f$ to $\Rnum$ be declaring $f$ to equal zero outside of $[a,b]$, show that $\int_\Rnum f(x)\dif x=\int_a^b f(x)\dif x$.
+\begin{proof}
+
+\end{proof}
+
+
+
+
+\section{Solution of Ex 1.3.24}
+Show that a function $f:\Rnum^d\to \mathbb{C}$ is measurable if and only if it is pointwise almost everywhere limit of continuous functions $f_n:\Rnum^d\to \mathbb{C}$. (\textit{Hint:} If $f:\Rnum^d\to\mathbb{C}$ is measurable and $n\geq 1$, show that there exists a continuous function $f_n:\Rnum^d\to \mathbb{C}$ for which the set $\{x\in B(0,0):\abs{f(x)-f_n(x)}\geq 1/n\}$ has measure at most $\frac{1}{2^n}$. You may find Exercise 1.3.24 below to be useful for this.) Use this (and Egorov's theorem, Theorem 1.3.26) to give an alternate proof of Lusin's theorem for arbitrary measurable functions.
+\begin{proof}
+
+\end{proof}
+
+
+\end{document}
